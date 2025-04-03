@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-const { createWalletConnectProvider } = require("../web3/walletConnect");
-
 // Account Page Route
 router.get("/userDashboard", (req, res) => {
     res.render("index");
@@ -34,7 +32,7 @@ router.get("/earning", (req, res) => {
 });
 // Account Page Route
 router.get("/", (req, res) => {
-    res.render("index-2", { createWalletConnectProvider });
+    res.render("index-2");
 });
 
 // Account Page Route
