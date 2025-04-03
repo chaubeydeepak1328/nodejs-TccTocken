@@ -1,0 +1,24 @@
+{
+  "name": "tcctoken",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@walletconnect/ethereum-provider": "^2.19.2",
+    "@walletconnect/web3-provider": "^1.8.0",
+    "axios": "^1.8.4",
+    "body-parser": "^2.2.0",
+    "colors": "^1.4.0",
+    "cookie-parser": "^1.4.7",
+    "express": "^5.1.0",
+    "hbs": "^4.2.0",
+    "web3": "^4.16.0"
+  }
+}

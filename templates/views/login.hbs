@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en"> <!--<![endif]-->
+
+
+<!-- Mirrored from frenify.com/work/envato/frenify/html/meta-portal/1//userDashboard by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Feb 2025 19:26:15 GMT -->
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <meta name="description" content="MetaPortal">
+    <meta name="author" content="Frenify">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <title> Home</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&amp;family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+        rel="stylesheet">
+    <!-- !Google Fonts -->
+
+    <!-- Styles -->
+    <link type="text/css" rel="stylesheet" href="css/plugins9d49.css?ver=10.0" />
+    <link type="text/css" rel="stylesheet" href="css/style9d49.css?ver=10.0" />
+    <!--[if lt IE 9]> <script type="text/javascript" src="js/modernizr.custom.js?ver=10.0"></script> <![endif]-->
+    <!-- !Styles -->
+
+</head>
+<style>
+    .warpper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tab {
+        cursor: pointer;
+        padding: 10px 20px;
+        margin: 0px 2px;
+        display: inline-block;
+        border-radius: 3px 3px 0px 0px;
+        border-radius: 6px;
+        color: white !important;
+        border: 3px solid transparent;
+        background: -moz-linear-gradient(45deg, var(--mc1), var(--mc2), var(--mc1), var(--mc2)) border-box;
+        background: -webkit-linear-gradient(45deg, var(--mc1), var(--mc2), var(--mc1), var(--mc2)) border-box;
+        background: linear-gradient(45deg, var(--mc1), var(--mc2), var(--mc1), var(--mc2)) border-box;
+        -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+
+        background-size: 300% 300%;
+        -webkit-animation: 4s infinite alternate animatedgradient;
+        animation: 4s infinite alternate animatedgradient;
+
+    }
+
+    .panels {
+        box-shadow: 0 2rem 2rem #00000080;
+        min-height: 200px;
+        width: 100%;
+        max-width: 900px;
+        border-radius: 3px;
+        overflow: hidden;
+        padding: 20px;
+    }
+
+    .panel {
+        display: none;
+        animation: fadein .8s;
+    }
+
+    @keyframes fadein {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    .panel-title {
+        font-size: 1.5em;
+        font-weight: bold
+    }
+
+    .radio {
+        display: none;
+    }
+
+    #one:checked~.panels #one-panel,
+    #two:checked~.panels #two-panel,
+    #three:checked~.panels #three-panel {
+        display: block
+    }
+
+    #one:checked~.tabs #one-tab,
+    #two:checked~.tabs #two-tab,
+    #three:checked~.tabs #three-tab {}
+</style>
+
+<body>
+
+    <!-- Preloader -->
+    <div class="metaportal_fn_preloader">
+        <div class="loading-container">
+            <div class="loading">
+                <div class="l1">
+                    <div></div>
+                </div>
+                <div class="l2">
+                    <div></div>
+                </div>
+                <div class="l3">
+                    <div></div>
+                </div>
+                <div class="l4">
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- !Preloader -->
+
+    <!-- Left Navigation -->
+    <div class="metaportal_fn_leftnav_closer ready"></div>
+    <div class="metaportal_fn_leftnav ready">
+        <a href="#" class="fn__closer"><span></span></a>
+        <div class="navbox">
+            <div class="list_holder">
+                <ul class="metaportal_fn_items">
+                    <li>
+                        <div class="item">
+                            <a href="https://opensea.io/" target="_blank"></a>
+                            <span class="icon">
+                                <img src="img/market/opensea.png" alt="">
+                            </span>
+                            <span class="text">Opensea</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item">
+                            <a href="https://discord.com/" target="_blank"></a>
+                            <span class="icon">
+                                <img src="img/market/discord.png" alt="">
+                            </span>
+                            <span class="text">Discord</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav_holder">
+
+                <!-- For JS -->
+                <span class="icon">
+                    <img src="svg/down.svg" alt="" class="fn__svg">
+                </span>
+                <!-- For JS -->
+
+
+            </div>
+
+        </div>
+    </div>
+    <!-- !Left Navigation -->
+
+
+    <!-- Searchbox Popup -->
+    <div class="metaportal_fn_search_closer"></div>
+    <div class="metaportal_fn_searchbox">
+        <div class="container small">
+            <div class="searchbox">
+                <input type="text" placeholder="Search here...">
+                <a href="#">
+                    <img src="svg/loupe.svg" alt="" class="fn__svg">
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- !Searchbox Popup -->
+
+    <!-- Wallet Popup -->
+    <div class="metaportal_fn_wallet_closer ready"></div>
+    <div class="metaportal_fn_walletbox ready">
+        <a href="#" class="fn__closer"><span></span></a>
+        <div class="walletbox">
+
+            <div class="title_holder">
+                <h3>Connect Wallet</h3>
+                <p>Connect with one of our available wallet providers or create a new one.</p>
+            </div>
+
+            <div class="list_holder">
+                <ul class="metaportal_fn_items">
+                    {{>connectWallet}}
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <!-- !Wallet Popup -->
+
+    <!-- Main -->
+    <div class="metaportal_fn_main">
+
+        <!-- Mobile Navigation -->
+        <div class="metaportal_fn_mobnav">
+            <div class="mob_top">
+                <div class="social_trigger">
+                    <div class="trigger">
+                        <span></span>
+                    </div>
+                    <div class="social">
+                        <ul>
+                            <li><a href="#" target="_blank">Fb.</a></li>
+                            <li><a href="#" target="_blank">Tw.</a></li>
+                            <li><a href="#" target="_blank">In.</a></li>
+                            <li><a href="#" target="_blank">Ln.</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="wallet">
+                    <a href="#" class="metaportal_fn_button wallet_opener"><span id="walletAddress">Wallet</span></a>
+                </div>
+            </div>
+            <div class="mob_mid">
+                <div class="logo">
+                    <a href="/"><img src="img/logo.png" alt=""></a>
+                </div>
+                <div class="trigger">
+                    <span></span>
+                </div>
+            </div>
+            <div class="mob_bot">
+                <ul>
+                    <li><a class="creative_link" href="/">Home</a></li>
+                    <li><a class="creative_link" href="/about">About</a></li>
+                    <li><a class="creative_link" href="/tocenomics">Tocenomic</a></li>
+                    <li><a class="creative_link" href="/roadmap">RoadMap</a></li>
+                    <li><a class="creative_link" href="/contact">Contact</a></li>
+                </ul>
+                <div>
+                    <a href="/login" class="metaportal_fn_button "><span>Login</span></a>
+                </div>
+            </div>
+        </div>
+        <!-- !Mobile Navigation -->
+
+        <!-- Header -->
+        {{>header}}
+        <!-- !Header -->
+
+        <!-- Content -->
+        <div class="metaportal_fn_content">
+
+            <!-- Section -->
+            <section id="contact">
+                <div class="container">
+
+                    <!-- <h3 class="fn__maintitle big" data-text="Contact Us" data-align="center">Contact Us</h3> -->
+                    <div class="warpper">
+                        <input class="radio" id="one" class="metaportal_fn_button " name="group" type="radio" checked
+                            style="color:white">
+                        <input class="radio" id="two" class="metaportal_fn_button " name="group" type="radio"
+                            style="color:white">
+                        <input class="radio" id="three" class="metaportal_fn_button " name="group" type="radio"
+                            style="color:white">
+                        <div class="tabs">
+                            <label class="tab" class="metaportal_fn_button " id="one-tab" for="one"
+                                style="color:white ">LOGIN</label>
+                            <label class="tab" class="metaportal_fn_button " id="two-tab" for="two"
+                                style="color:white ">SIGNUP</label>
+
+                        </div>
+                        <div class="panels">
+                            <div class="panel" id="one-panel">
+
+                                <div class="fn_cs_contact_form">
+                                    <form action="https://frenify.com/" method="post" class="contact_form"
+                                        id="contact_form" autocomplete="off">
+                                        <div class="input_list">
+                                            <ul>
+                                                <li>
+                                                    <input id="name" type="text" placeholder="Your Name *" />
+                                                </li>
+                                                <li>
+                                                    <input id="email" type="text" placeholder="Your Email *" />
+                                                </li>
+                                                <li>
+                                                    <input id="password" type="text" placeholder="password" />
+                                                </li>
+                                                <li>
+                                                    <input id="password" type="text" placeholder="Confirm password" />
+                                                </li>
+
+
+                                            </ul>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="panel" id="two-panel">
+                                <div>
+                                    <h5>Sign up</h5>
+                                    <div class="fn_cs_contact_form">
+                                        <form action="https://frenify.com/" method="post" class="contact_form"
+                                            id="contact_form" autocomplete="off">
+                                            <div class="input_list">
+                                                <ul>
+                                                    <li>
+                                                        <input type="text" placeholder="Neme" />
+                                                    </li>
+                                                    <li>
+                                                        <input type="text" placeholder="Email" />
+                                                    </li>
+                                                    <li>
+                                                        <input type="text" placeholder="Password" />
+                                                    </li>
+                                                    <li>
+                                                        <input type="text" placeholder="Select Introducer Code" />
+                                                    </li>
+                                                    <li>
+                                                        <input type="text" placeholder="Introducer Name" />
+                                                    </li>
+                                                    <li>
+                                                        <input type="text" placeholder="Father Husband Name" />
+                                                    </li>
+
+
+                                                </ul>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+            </section>
+
+
+            <!-- Footer -->
+            <footer id="footer">
+                <div class="container">
+                    <div class="footer">
+                        <div class="left_part">
+                            <p>Copyright 2025 — Designed </p>
+                        </div>
+                        <div class="right_part">
+                            <ul>
+                                <li><a class="creative_link" href="#">Privacy Policy</a></li>
+                                <li><a class="creative_link" href="#">Cookies</a></li>
+                                <li><a class="creative_link" href="#">Terms &amp; Conditions</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- !Footer -->
+
+        </div>
+        <!-- !Content -->
+
+
+        <!-- Totop -->
+        <a href="#" class="metaportal_fn_totop">
+            <span class="totop_inner">
+                <span class="icon">
+                    <img src="svg/down.svg" alt="" class="fn__svg">
+                </span>
+                <span class="text">Scroll To Top</span>
+            </span>
+        </a>
+        <!-- /Totop -->
+
+    </div>
+    <!-- !Main -->
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="js/jquery9d49.js?ver=10.0"></script>
+    <script type="text/javascript" src="js/plugins9d49.js?ver=10.0"></script>
+    <!--[if lt IE 10]> <script type="text/javascript" src="js/ie8.js?ver=10.0"></script> <![endif]-->
+    <script type="text/javascript" src="js/init9d49.js?ver=10.0"></script>
+    <!-- !Scripts -->
+
+</body>
+
+
+</html>

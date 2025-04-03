@@ -1,0 +1,410 @@
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+<head>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+  <meta name="description" content="MetaPortal" />
+  <meta name="author" content="Frenify" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <title> About</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com/" />
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&amp;family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+    rel="stylesheet" />
+  <!-- !Google Fonts -->
+
+  <!-- Styles -->
+  <link type="text/css" rel="stylesheet" href="css/plugins9d49.css?ver=10.0" />
+  <link type="text/css" rel="stylesheet" href="css/style9d49.css?ver=10.0" />
+  <!--[if lt IE 9]> <script type="text/javascript" src="js/modernizr.custom.js?ver=10.0"></script> <![endif]-->
+  <!-- !Styles -->
+
+</head>
+<style>
+  .fn_cs_steps .item_in {
+    height: 100%;
+    padding: 37px 20px 54px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, .03);
+  }
+</style>
+
+<body>
+
+  <!-- Preloader -->
+  <div class="metaportal_fn_preloader">
+    <div class="loading-container">
+      <div class="loading">
+        <div class="l1">
+          <div></div>
+        </div>
+        <div class="l2">
+          <div></div>
+        </div>
+        <div class="l3">
+          <div></div>
+        </div>
+        <div class="l4">
+          <div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- !Preloader -->
+
+  <!-- Left Navigation -->
+  <div class="metaportal_fn_leftnav_closer ready"></div>
+  <div class="metaportal_fn_leftnav ready">
+    <a href="#" class="fn__closer"><span></span></a>
+    <div class="navbox">
+      <div class="list_holder">
+        <ul class="metaportal_fn_items">
+          <li>
+            <div class="item">
+              <a href="https://opensea.io/" target="_blank"></a>
+              <span class="icon">
+                <img src="img/market/opensea.png" alt="" />
+              </span>
+              <span class="text">Opensea</span>
+            </div>
+          </li>
+          <li>
+            <div class="item">
+              <a href="https://discord.com/" target="_blank"></a>
+              <span class="icon">
+                <img src="img/market/discord.png" alt="" />
+              </span>
+              <span class="text">Discord</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="nav_holder">
+
+        <!-- For JS -->
+        <span class="icon">
+          <img src="svg/down.svg" alt="" class="fn__svg" />
+        </span>
+        <!-- For JS -->
+
+      </div>
+
+    </div>
+  </div>
+  <!-- !Left Navigation -->
+
+  <!-- Searchbox Popup -->
+  <div class="metaportal_fn_search_closer"></div>
+  <div class="metaportal_fn_searchbox">
+    <div class="container small">
+      <div class="searchbox">
+        <input type="text" placeholder="Search here..." />
+        <a href="#">
+          <img src="svg/loupe.svg" alt="" class="fn__svg" />
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- !Searchbox Popup -->
+
+  <!-- Wallet Popup -->
+  <div class="metaportal_fn_wallet_closer ready"></div>
+  <div class="metaportal_fn_walletbox ready">
+    <a href="#" class="fn__closer"><span></span></a>
+    <div class="walletbox">
+
+      <div class="title_holder">
+        <h3>Connect Wallet</h3>
+        <p>Connect with one of our available wallet providers or create a new
+          one.</p>
+      </div>
+
+      <div class="list_holder">
+        <ul class="metaportal_fn_items">
+          {{>connectWallet}}
+        </ul>
+      </div>
+
+    </div>
+  </div>
+  <!-- !Wallet Popup -->
+
+  <!-- Main -->
+  <div class="metaportal_fn_main">
+
+    <!-- Mobile Navigation -->
+    <div class="metaportal_fn_mobnav">
+      <div class="mob_top">
+        <div class="social_trigger">
+          <div class="trigger">
+            <span></span>
+          </div>
+
+        </div>
+        <div class="wallet">
+          <a href="#" class="metaportal_fn_button wallet_opener"><span id="walletAddress">Wallet</span></a>
+        </div>
+      </div>
+      <div class="mob_mid">
+        <div class="logo">
+          <a href="/"><img src="img/logo1.png" alt="" style="height: 58px;" /></a>
+        </div>
+        <div class="trigger">
+          <span></span>
+        </div>
+      </div>
+      <div class="mob_bot">
+        <ul>
+          <li><a class="creative_link" href="/">Home</a></li>
+          <li><a class="creative_link" href="/about">About</a></li>
+          <li><a class="creative_link" href="/tocenomics">Tocenomic</a></li>
+          <li><a class="creative_link" href="/roadmap">RoadMap</a></li>
+          <li><a class="creative_link" href="/contact">Contact</a></li>
+        </ul>
+
+      </div>
+
+    </div>
+    <!-- !Mobile Navigation -->
+
+    <!-- Header -->
+    {{>header}}
+    <!-- !Header -->
+
+    <!-- Content -->
+    <div class="metaportal_fn_content">
+
+      <!-- About Section -->
+      <section id="about">
+
+        <!-- About Shortcode -->
+        <div class="fn_cs_about">
+          <div class="left_part">
+            <div class="img">
+              <div class="img_in" data-bg-img="img/slider/crj4.avif"><img src="img/1x1.jpg" alt="" /></div>
+            </div>
+            <div class="bg_overlay">
+              <div class="bg_color"></div>
+              <div class="bg_image" data-bg-img="img/about/bg.jpg"></div>
+            </div>
+          </div>
+          <div class="right_part">
+            <div class="right_in">
+              <h3 class="fn__maintitle" data-text="About TCC">About TCC 2.0</h3>
+              <div class="fn_cs_divider">
+                <div class="divider">
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+              <div class="desc">
+                <p>The TCC 2.0 Initial Coin Offering (ICO) presents a unique
+                  opportunity for early adopters to invest in a high-potential
+                  project backed by advanced blockchain technology, strategic
+                  partnerships, and a clear growth roadmap. Our goal is to
+                  create an ecosystem where businesses and individuals can
+                  transact seamlessly while benefiting from decentralization,
+                  security, and financial inclusivity.</p>
+
+                <p>Built on a secure and scalable blockchain network, TCC 2.0
+                  offers fast, low-cost transactions, decentralized
+                  governance, and real-world applications that redefine the
+                  way digital assets are utilized.</p>
+              </div>
+              <a href="#" class="metaportal_fn_button" target="_blank"><span>Token Details</span></a>
+            </div>
+          </div>
+        </div>
+        <!-- !About Shortcode -->
+        <div class="container" style="margin-top: -30px;">
+          <!-- Mint Shortcode -->
+          <div class="fn_cs_mint">
+            <div style="width:100%;">
+              <!-- <h3 class="fn__maintitle" data-text="How to Mint" ">How to Mint</h3>
+                        <div class="fn_cs_divider" >
+                            <div class="divider">
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div> -->
+
+              <div class="fn_cs_steps">
+                <ul>
+
+                  <li>
+                    <div class="item">
+                      <div class="item_in">
+                        <h3 class="fn__gradient_title">Mission</h3>
+                        <p style="font-size: 15px;text-transform: lowercase;">At TCC 2.0, our mission is to empower
+                          individuals,
+                          businesses, and industries by providing a fast,
+                          secure, and decentralized cryptocurrency solution.
+                        </p><br />
+                        <p style="font-size: 15px;text-transform: lowercase;">Our focus is on delivering real-world
+                          utility,
+                          ensuring that the TCC 2.0 Token isn’t just another
+                          speculative asset but a vital component in a global,
+                          decentralized economy.</p>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="item">
+                      <div class="item_in">
+                        <h3 class="fn__gradient_title">Vision</h3>
+                        <p style="font-size: 15px;text-transform: lowercase;">To build a global ecosystem powered by the
+                          TCC 2.0
+                          Token where everyone can benefit from the
+                          efficiencies and innovations offered by blockchain
+                          technology.</p><br />
+                        <p style="font-size: 15px;text-transform: lowercase;">Our goal is to establish the TCC 2.0
+                          ecosystem as the
+                          leading blockchain solution that is scalable,
+                          secure, and adaptable to any market need.</p>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+          <!-- !Mint Shortcode -->
+        </div>
+
+        <div class="container mt-4">
+          <!-- Mint Shortcode -->
+          <div class="fn_cs_mint">
+            <div class="left_part">
+              <h3 class="fn__maintitle" data-text="Why Choose TCC 2.0?">Why
+                Choose TCC 2.0?</h3>
+              <div class="fn_cs_divider">
+                <div class="divider">
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+              <div class="desc">
+                <p>Choosing TCC 2.0 Token means investing in a secure,
+                  scalable, and transparent blockchain ecosystem that is
+                  focused on real-world utility and long-term growth. With
+                  strong community governance, a focus on innovation, and the
+                  potential for widespread adoption, TCC 2.0 Token is the
+                  ideal choice for anyone looking to be part of the future of
+                  decentralized finance, business, and technology.</p>
+                <p>TCC 2.0 Token is powered by an advanced blockchain platform
+                  designed to deliver high scalability, security, and
+                  efficiency.</p>
+
+              </div>
+              <!-- <a href="nft-single.html" class="metaportal_fn_button"><span>How to Mint</span></a> -->
+            </div>
+
+            <div class="right_part">
+
+              <!-- Steps Shortcode -->
+              <div class="fn_cs_steps">
+                <ul>
+                  <li>
+                    <div class="item">
+                      <div class="item_in">
+                        <h3 class="fn__gradient_title">01</h3>
+                        <p>Secure & Transparent</p>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="item">
+                      <div class="item_in">
+                        <h3 class="fn__gradient_title">02</h3>
+                        <p>Lightning-Fast Transactions</p>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="item">
+                      <div class="item_in">
+                        <h3 class="fn__gradient_title">03</h3>
+                        <p>Innovative Utility</p>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="item">
+                      <div class="item_in">
+                        <h3 class="fn__gradient_title">04</h3>
+                        <p>Scalability & Efficiency</p>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <!-- !Steps Shortcode -->
+
+            </div>
+
+          </div>
+          <!-- !Mint Shortcode -->
+        </div>
+
+      </section>
+      <!-- !About Section -->
+
+      <!-- Footer -->
+      <footer id="footer">
+        <div class="container">
+          <div class="footer">
+            <div class="left_part">
+              <p>Copyright 2025 — Designed </p>
+            </div>
+            <div class="right_part">
+              <ul>
+                <li><a class="creative_link" href="#">Privacy Policy</a></li>
+                <li><a class="creative_link" href="#">Cookies</a></li>
+                <li><a class="creative_link" href="#">Terms &amp; Conditions</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <!-- !Footer -->
+
+    </div>
+    <!-- !Content -->
+
+    <!-- Totop -->
+    <a href="#" class="metaportal_fn_totop">
+      <span class="totop_inner">
+        <span class="icon">
+          <img src="svg/down.svg" alt="" class="fn__svg" />
+        </span>
+        <span class="text">Scroll To Top</span>
+      </span>
+    </a>
+    <!-- /Totop -->
+
+  </div>
+  <!-- !Main -->
+
+  <!-- Scripts -->
+  <script type="text/javascript" src="js/jquery9d49.js?ver=10.0"></script>
+  <script type="text/javascript" src="js/plugins9d49.js?ver=10.0"></script>
+  <!--[if lt IE 10]> <script type="text/javascript" src="js/ie8.js?ver=10.0"></script> <![endif]-->
+  <script type="text/javascript" src="js/init9d49.js?ver=10.0"></script>
+  <!-- !Scripts -->
+
+</body>
+
+</html>

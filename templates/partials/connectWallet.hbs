@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect Wallet</title>
+    <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
+</head>
+
+<body>
+    <ul class="metaportal_fn_items">
+        <li>
+            <button class="item" id="connectWallet">
+                <span class="icon">
+                    <img src="/img/wallet/walletconnect.png" alt="">
+                </span>
+                <span class="text" id="walletText">Connect Wallet</span>
+            </button>
+        </li>
+    </ul>
+
+    <script>
+
+        let account = localStorage.getItem("walletAccount") || "";
+
+        document.getElementById("walletText").innerText = account ? "Connected" : "Connect Wallet";
+
+        async function connectWallet() {
+            if (window.ethereum) {
+                const web3 = new Web3(window.ethereum);
+                try {
+                    const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+                    account = accounts[0];
+                    localStorage.setItem("walletAccount", account);
+                    document.getElementById("walletText").innerText = "Connected";
+
+
+                    window.location.href = "/userDashboard";
+                } catch (error) {
+                    console.error("Connection Error:", error);
+                    alert("Failed to connect wallet");
+                }
+            } else {
+                alert("No Ethereum provider found. Please install MetaMask.");
+            }
+        }
+
+        document.getElementById("connectWallet").addEventListener("click", connectWallet);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+{
+    "watch": [
+        "src",
+        "views"
+    ],
+    "ext": "js,json,hbs",
+    "ignore": [
+        "node_modules"
+    ],
+    "exec": "node src/server.js"
+}

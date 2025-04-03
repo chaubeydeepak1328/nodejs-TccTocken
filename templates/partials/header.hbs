@@ -1,0 +1,58 @@
+<header id="header">
+    <div class="header">
+        <div class="header_in">
+
+            <div class="trigger_logo">
+                <div class="trigger">
+                    <span></span>
+                </div>
+                <div class="logo" style="padding: 2px;">
+                    <a href="/"><img src="img/logo1.png" alt="" style="height:90px;"></a>
+                </div>
+            </div>
+
+            <div class="nav">
+                <ul>
+                    <li><a class="creative_link" href="/">Home</a></li>
+                    <li><a class="creative_link" href="/about">About</a></li>
+                    <li><a class="creative_link" href="/tocenomics">Tocenomic</a></li>
+                    <li><a class="creative_link" href="/roadmap">RoadMap</a></li>
+                    <li><a class="creative_link" href="/contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="wallet">
+                <a href="#" class="metaportal_fn_button wallet_opener"><span id="walletAddress1">Connect To
+                        Wallet</span></a>
+            </div>
+
+        </div>
+    </div>
+</header>
+
+
+
+
+<script>
+    let walletAddress = localStorage.getItem("walletAccount") || "";
+    if (walletAddress) {
+        const walletOpener = document.getElementById("walletAddress");
+        const walletOpner1 = document.getElementById("walletAddress1");
+        if (walletOpener) {
+            walletOpener.innerText = `${walletAddress.slice(0, 5)}...${walletAddress.slice(-4)}`;
+            walletOpner1.innerText = `connected ${walletAddress.slice(0, 5)}...${walletAddress.slice(-4)}`;
+
+            window.location.href = "/userDashboard";
+        } else {
+            console.error('Element with ID "wallet_opener" not found.');
+        }
+    } else {
+        const walletText = document.getElementById("walletText");
+        if (walletText) {
+            walletText.innerText = "Connect Wallet";
+        } else {
+            console.error('Element with ID "walletText" not found.');
+        }
+    }
+
+</script>
