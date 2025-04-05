@@ -1606,69 +1606,19 @@
 
 
 
-  <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
-
-  <script>
-    let walletAddress = localStorage.getItem("walletAccount") || "";
-    if (!walletAddress) {
-      window.location.href = "/";
-    }
+  <script src="https://cdn.jsdelivr.net/npm/web3@4.16.0/dist/web3.min.js"></script>
+  <script src="/buy.js"></script>
 
 
-
-    const fetchWalletData = async () => {
-      try {
-        const response = await fetch("/wallet_data", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const data = await response.json();
-
-
-        console.log(data.data.WalletBalance);
-        document.getElementById("WalletBalance").innerHTML = data.data.WalletBalance;
-
-      } catch (error) {
-        console.error('Error fetching wallet data:', error);
-      }
-    };
-
-
-    fetchWalletData();
-
-
-    const transferButton = document.getElementById("transferButton");
-    const transferAmountInput = document.getElementById("transferAmount");
-
-    const sendSepolia = async () => {
-      console.log("Sending Sepolia...");
-      try {
-        const web3 = new Web3(window.ethereum); // create Web3 instance
-
-        const txHash = await window.ethereum.request({
-          method: 'eth_sendTransaction',
-          params: [{
-            from: localStorage.getItem("walletAccount"),
-            to: "0x6a2b234dfc53ab431affbe9eb80bb2adc0b04b63",
-            value: web3.utils.toHex(web3.utils.toWei('0.005', 'ether')),
-          }]
-        });
-
-        console.log("Transaction Hash:", txHash);
-      } catch (err) {
-        console.error("Transaction Failed:", err);
-      }
-    };
-
-    transferButton.addEventListener("click", sendSepolia);
+  <script type="module">
+    import React from 'https://esm.sh/react@18.2.0'
+    import { QueryClient } from 'https://esm.sh/@tanstack/react-query'
+    import { createClient } from 'https://esm.sh/viem@2.x'
+    import { createConfig } from 'https://esm.sh/wagmi'
+    <script />
 
 
 
+</body >
 
-
-  </script>
-</body>
-
-</html>
+</html >
