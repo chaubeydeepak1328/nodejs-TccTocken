@@ -24,6 +24,8 @@ app.use(express.static(static_path));
 app.use(express.static(partial_path)); // Serve partials folder as static
 
 const userRouter = require("./router/user");
+const web3package = require("./router/web3package");
+
 
 // Middleware: Use JSON parsing, cookie parsing, and URL encoding middleware.
 app.use(express.json());
@@ -36,6 +38,7 @@ app.use(cookieParser());
 
 // Routers: Use the imported routers for handling routes.
 app.use(userRouter);
+app.use(web3package);
 
 
 // Start Server: Start the Express server on the defined port.

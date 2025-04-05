@@ -220,6 +220,12 @@
 
     <div class="page-content">
 
+
+      <div>
+        <input type="number" id="transferAmount">
+        <button id="transferButton">Transfer</button>
+      </div>
+
       <!-- Topbar Start -->
       <header class="app-header flex items-center px-4 gap-3">
         <!-- Sidenav Menu Toggle Button -->
@@ -309,7 +315,8 @@
                     <div>
                       <h6 class="mb-1 text-gray-600 dark:text-gray-400">Your
                         Wallet Balance</h6>
-                      <p class="font-normal text-sm text-gray-400 truncate dark:text-gray-500">0.000</p>
+                      <p class="font-normal text-sm text-gray-400 truncate dark:text-gray-500" id="WalletBalance">0.000
+                      </p>
                     </div>
 
                   </div>
@@ -1580,13 +1587,7 @@
         </div> -->
   </div>
 
-  <script>
-    let walletAddress = localStorage.getItem("walletAccount") || "";
-    if (!walletAddress) {
-      window.location.href = "/";
-    }
 
-  </script>
 
   <!-- Plugin Js -->
   <script src="libs/simplebar/simplebar.min.js"></script>
@@ -1602,6 +1603,72 @@
   <!-- Dashboard Project Page js -->
   <script src="js/pages/dashboard.js"></script>
 
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
+
+  <script>
+    let walletAddress = localStorage.getItem("walletAccount") || "";
+    if (!walletAddress) {
+      window.location.href = "/";
+    }
+
+
+
+    const fetchWalletData = async () => {
+      try {
+        const response = await fetch("/wallet_data", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+
+
+        console.log(data.data.WalletBalance);
+        document.getElementById("WalletBalance").innerHTML = data.data.WalletBalance;
+
+      } catch (error) {
+        console.error('Error fetching wallet data:', error);
+      }
+    };
+
+
+    fetchWalletData();
+
+
+    const transferButton = document.getElementById("transferButton");
+    const transferAmountInput = document.getElementById("transferAmount");
+
+    const sendSepolia = async () => {
+      console.log("Sending Sepolia...");
+      try {
+        const web3 = new Web3(window.ethereum); // create Web3 instance
+
+        const txHash = await window.ethereum.request({
+          method: 'eth_sendTransaction',
+          params: [{
+            from: localStorage.getItem("walletAccount"),
+            to: "0x6a2b234dfc53ab431affbe9eb80bb2adc0b04b63",
+            value: web3.utils.toHex(web3.utils.toWei('0.005', 'ether')),
+          }]
+        });
+
+        console.log("Transaction Hash:", txHash);
+      } catch (err) {
+        console.error("Transaction Failed:", err);
+      }
+    };
+
+    transferButton.addEventListener("click", sendSepolia);
+
+
+
+
+
+  </script>
 </body>
 
 </html>
