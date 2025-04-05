@@ -34,25 +34,34 @@
 
 
 <script>
-    let walletAddress = localStorage.getItem("walletAccount") || "";
-    if (walletAddress) {
-        const walletOpener = document.getElementById("walletAddress");
-        const walletOpner1 = document.getElementById("walletAddress1");
-        if (walletOpener) {
-            walletOpener.innerText = `${walletAddress.slice(0, 5)}...${walletAddress.slice(-4)}`;
-            walletOpner1.innerText = `connected ${walletAddress.slice(0, 5)}...${walletAddress.slice(-4)}`;
+    document.addEventListener("DOMContentLoaded", function () {
+        const WalletConnection = async () => {
+            const web3 = new Web3(window.ethereum);
+            try {
+                const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+                const walletAddress = accounts[0];
 
-            window.location.href = "/userDashboard";
-        } else {
-            console.error('Element with ID "wallet_opener" not found.');
-        }
-    } else {
-        const walletText = document.getElementById("walletText");
-        if (walletText) {
-            walletText.innerText = "Connect Wallet";
-        } else {
-            console.error('Element with ID "walletText" not found.');
-        }
-    }
+                if (walletAddress) {
+                    const walletOpener = document.getElementById("walletAddress");
+                    const walletOpner1 = document.getElementById("walletAddress1");
 
+                    const shortAddress = `${walletAddress.slice(0, 5)}...${walletAddress.slice(-4)}`;
+
+                    if (walletOpener) walletOpener.innerText = shortAddress;
+                    if (walletOpner1) walletOpner1.innerText = `Connected ${shortAddress}`;
+
+                    // Optional redirect
+                    window.location.href = "/userDashboard";
+                } else {
+                    const walletText = document.getElementById("walletText");
+                    if (walletText) walletText.innerText = "Connect Wallet";
+                }
+
+            } catch (error) {
+                console.error("Error connecting to wallet:", error);
+            }
+        };
+
+        WalletConnection();
+    });
 </script>

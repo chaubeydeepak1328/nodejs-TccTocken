@@ -16,7 +16,7 @@ const web3 = new Web3(INFURA_URL);
 const abi = JSON.parse(fs.readFileSync(path.join(__dirname, "../Contract/contractABI.json"), "utf8"));
 
 // Contract instance   process.env.CONTRACT_ADDRESS
-const contract = new web3.eth.Contract(abi, "0x6a2b234dfc53ab431affbe9eb80bb2adc0b04b63");
+const contract = new web3.eth.Contract(abi, "0xe3eafae0A321D6d40fcA7103876A7eBA4C5855E9");
 
 router.get("/wallet_data", async (req, res) => {
     try {
@@ -27,13 +27,21 @@ router.get("/wallet_data", async (req, res) => {
         // make the call to the contract
         const totalSold = await contract.methods.totalSold().call();
 
+        // make the call to the contract
+        const user = await contract.methods.users("0xc0358Bcd0F329644A9A034f9F2C4a4838ae819A5").call();
+
+        // make the call to the contract
+        const getdirectReferal = await contract.methods.getDirectReferrals("0xc0358Bcd0F329644A9A034f9F2C4a4838ae819A5").call();
+
         // total remaining = total supply - total sold
         const totalRemaining = totalSupply - totalSold;
 
         // make the call to the contract
         const referalAllocation = await contract.methods.TOTAL_REFERRAL_ALLOCATION().call();
 
-        const WalletBalance = await web3.eth.getBalance('0x6a2b234dfc53ab431affbe9eb80bb2adc0b04b63');
+        // const WalletBalance = await web3.eth.getBalance('0xe3eafae0A321D6d40fcA7103876A7eBA4C5855E9');
+
+        console.log("user", user);
 
 
         res.send({
@@ -42,7 +50,9 @@ router.get("/wallet_data", async (req, res) => {
                 "totalSold": totalSold.toString(),
                 "totalRemaining": totalRemaining.toString(),
                 "referalAllocation": referalAllocation.toString(),
-                "WalletBalance": web3.utils.fromWei(WalletBalance, 'ether').toString()
+                // "WalletBalance": web3.utils.fromWei(WalletBalance, 'ether').toString(),
+                "user": user.toString(),
+                "getdirectReferal": getdirectReferal.toString(),
             }
         });
     } catch (error) {
@@ -50,6 +60,40 @@ router.get("/wallet_data", async (req, res) => {
         res.status(500).send("Error fetching data from blockchain.");
     }
 });
+
+
+
+router.post("/user_details", async (req, res) => {
+    try {
+
+        const { walletAddress } = req.body;
+
+        if (!walletAddress) {
+            return res.status(400).send({ error: "walletAddress is required" });
+        }
+
+        // make the call to the contract
+        const user = await contract.methods.users(walletAddress).call();
+
+
+        console.log("user", user);
+
+
+        res.send({
+            data: {
+                "referrer": user.referrer,
+                "tier1Rewards": user.tier1Rewards.toString(),
+                "tier2Rewards": user.tier2Rewards.toString(),
+                "totalBoughtTokens": user.totalBoughtTokens.toString(),
+
+            }
+        });
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        res.status(500).send("Error fetching data from blockchain.");
+    }
+});
+
 
 
 

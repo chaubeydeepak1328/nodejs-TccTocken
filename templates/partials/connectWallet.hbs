@@ -15,27 +15,39 @@
                 <span class="icon">
                     <img src="/img/wallet/walletconnect.png" alt="">
                 </span>
-                <span class="text" id="walletText">Connect Wallet</span>
+                <span class="text" id="walletText">Checking...</span>
             </button>
         </li>
     </ul>
 
     <script>
+        const walletText = document.getElementById("walletText");
+        const connectBtn = document.getElementById("connectWallet");
 
-        let account = localStorage.getItem("walletAccount") || "";
+        let account = null;
 
-        document.getElementById("walletText").innerText = account ? "Connected" : "Connect Wallet";
+        async function checkIfWalletConnected() {
+            if (window.ethereum) {
+                const web3 = new Web3(window.ethereum);
+                const accounts = await web3.eth.getAccounts();
+                if (accounts.length > 0) {
+                    account = accounts[0];
+                    walletText.innerText = "Connected";
+                    window.location.href = "/userDashboard";
+                } else {
+                    walletText.innerText = "Connect Wallet";
+                }
+            } else {
+                walletText.innerText = "MetaMask Not Found";
+            }
+        }
 
         async function connectWallet() {
             if (window.ethereum) {
-                const web3 = new Web3(window.ethereum);
                 try {
                     const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
                     account = accounts[0];
-                    localStorage.setItem("walletAccount", account);
-                    document.getElementById("walletText").innerText = "Connected";
-
-
+                    walletText.innerText = "Connected";
                     window.location.href = "/userDashboard";
                 } catch (error) {
                     console.error("Connection Error:", error);
@@ -46,7 +58,10 @@
             }
         }
 
-        document.getElementById("connectWallet").addEventListener("click", connectWallet);
+        connectBtn.addEventListener("click", connectWallet);
+
+        // Auto check on load
+        checkIfWalletConnected();
     </script>
 </body>
 

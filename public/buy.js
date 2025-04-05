@@ -385,9 +385,31 @@
 
 
 
+
+const checkWalletSign = async () => {
+    const web3 = new Web3(window.ethereum);
+    try {
+        const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+        const account = accounts[0];
+
+        if (!account) {
+            window.location.href = "/";
+        } else {
+            console.log("Connected account:", account);
+        }
+    } catch (error) {
+
+        console.error("Error connecting to wallet:", error);
+    }
+}
+
+
+
+
 const sendEthButton = document.querySelector('.sendEthButton');
 const transferAmountInput = document.getElementById("transferAmount");
 const transferButton = document.getElementById("transferButton");
+const referral = document.getElementById("referalAddress");
 
 
 
@@ -395,6 +417,7 @@ const web3 = new Web3(window.ethereum); // create Web3 instance
 let abi = [];
 let accounts = [];
 let contract = null;
+const contractAddress = "0xe3eafae0A321D6d40fcA7103876A7eBA4C5855E9";
 
 const fetchAbi = async () => {
     const response = await fetch('./contractABI.json');
@@ -402,10 +425,41 @@ const fetchAbi = async () => {
     console.log("ABI", abi);
 
 
-    contract = new web3.eth.Contract(abi, "0x6a2b234dfc53ab431affbe9eb80bb2adc0b04b63");
+    contract = new web3.eth.Contract(abi, contractAddress);
 }
 
-fetchAbi();
+
+
+// const fetchWalletData = async () => {
+//     try {
+//         // make the call to the contract
+//         const totalSupply = await contract.methods.TOTAL_SUPPLY().call();
+
+//         // make the call to the contract
+//         const totalSold = await contract.methods.totalSold().call();
+
+//         // total remaining = total supply - total sold
+//         const totalRemaining = totalSupply - totalSold;
+
+//         // make the call to the contract
+//         const referalAllocation = await contract.methods.TOTAL_REFERRAL_ALLOCATION().call();
+
+//         const WalletBalance = await web3.eth.getBalance(contractAddress);
+
+//         console.log("WalletBalance", web3.utils.fromWei(WalletBalance, 'ether').toString());
+//         console.log("totalSupply", totalSupply.toString());
+//         console.log("totalSold", totalSold.toString());
+//         console.log("totalRemaining", totalRemaining.toString());
+//         console.log("referalAllocation", referalAllocation.toString());
+
+//         document.getElementById("WalletBalance").innerHTML = web3.utils.fromWei(WalletBalance, 'ether').toString();
+
+
+//     } catch (error) {
+//         console.error('Error fetching wallet data:', error);
+//     }
+// };
+
 
 
 
@@ -423,6 +477,7 @@ const walletTransfer = async () => {
 
     console.log("Sending came here...=====1");
     const amountInEth = transferAmountInput.value;
+    const referrerAddress = referral.value // Default address if not provided
 
     if (!amountInEth || isNaN(amountInEth) || Number(amountInEth) <= 0) {
         alert("Please enter a valid amount.");
@@ -436,47 +491,27 @@ const walletTransfer = async () => {
     console.log(amountInEth)
 
     const valueInWei = Web3.utils.toWei(amountInEth, 'ether');
-    // console.log("Gas Price:", gasPrice, web3.utils.toHex(BigInt(valueInWei)));
 
     console.log("Sending came here...=====3", web3.utils.toHex(BigInt(valueInWei)));
-    // 10000000000000
+
+    console.log("from", accounts[0]);
+    console.log("to", contractAddress);
+    console.log("referrerAddress", referrerAddress);
 
 
-    const referrerAddress = "0x00DcE81144af45AEeE39b606844dFf1E53597446";
+
     const estimatedGas = await contract.methods.buyTokens(referrerAddress).estimateGas({
         from: accounts[0],
         value: valueInWei
     });
 
-    // console.log("Sending came here...=====4");
-
-
-    // console.log("Estimated gas:", estimatedGas);
-
-
     const gasPrice = await web3.eth.getGasPrice();
-
-
-    // console.log("Gas Price:", gasPrice, web3.utils.toHex(web3.utils.toHex(BigInt(valueInWei))));
-
-    // console.log("Sending came here...=====6");
 
     const nonce = await web3.eth.getTransactionCount(accounts[0], 'latest');
 
-    // const tx = {
-    //     from: senderAddress,
-    //     to: "0x6a2b234dfc53ab431affbe9eb80bb2adc0b04b63",
-    //     value: valueInWei,
-    //     gas: estimatedGas,
-    //     gasPrice: gasPrice,
-    //     nonce: nonce,
-    //     data: contract.methods.buyTokens(referrerAddress).encodeABI()
-    // };
-
-
     const txParams = {
         from: accounts[0],
-        to: '0x6a2b234dfc53ab431affbe9eb80bb2adc0b04b63',
+        to: contractAddress,
         value: web3.utils.toHex(BigInt(valueInWei)),
         gas: web3.utils.toHex(BigInt(estimatedGas)),
         gasPrice: web3.utils.toHex(BigInt(gasPrice)),
@@ -497,45 +532,51 @@ const walletTransfer = async () => {
         console.error("Transaction Failed:", error);
         alert("Transaction failed: " + error.message);
     }
-
-    // const txParams = {
-    //     from: accounts[0],
-    //     to: '0x2f318C334780961FB129D2a6c30D0763d9a5C970',
-    //     value: web3.utils.toHex(valueInWei),
-    //     gasPrice: web3.utils.toHex(gasPrice),
-    //     gas: web3.utils.toHex(estimatedGas),
-    // };
-
-    // ethereum
-    //     .request({
-    //         method: 'eth_sendTransaction',
-    //         params: [
-    //             {
-    //                 from: accounts[0],
-    //                 to: '0x2f318C334780961FB129D2a6c30D0763d9a5C970',
-    //                 value: valueInWei,
-    //                 gasPrice: gasPrice,
-    //                 gas: estimatedGas,
-    //             },
-    //         ],
-    //     })
-    //     .then((txHash) => console.log(txHash))
-    //     .catch((error) => console.error);
 }
 
-//Sending Ethereum to an address
+
 transferButton.addEventListener('click', walletTransfer);
 
-// ethereumButton.addEventListener('click', () => {
-//     getAccount();
-// });
+
+
+const fetchUserDetails = async () => {
+
+    console.log("Fetching user details...", accounts[0]);
+    try {
+        const response = await fetch("/user_details", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ walletAddress: accounts[0] }),
+        });
+
+        const data = await response.json();
+
+        document.getElementById("totalBoughtTokens").innerHTML = data.data.totalBoughtTokens.toString();
+        document.getElementById("tier1Rewards").innerHTML = data.data.tier1Rewards.toString();
+        document.getElementById("tier2Rewards").innerHTML = data.data.tier2Rewards.toString();
+        document.getElementById("communityEarning").innerHTML = parseFloat(data.data.tier1Rewards) + parseFloat(data.data.tier2Rewards);
+
+
+
+    } catch (error) {
+        console.error('Error fetching wallet data:', error);
+    }
+};
+
+
+
 
 
 document.addEventListener('DOMContentLoaded', async () => {
     if (typeof window.ethereum !== 'undefined') {
         console.log('MetaMask is installed!');
+        await checkWalletSign();
         await getAccount();
         await fetchAbi();
+        fetchUserDetails();
+        // await fetchWalletData();
         // ethereumButton.innerText = 'Connect Wallet';
     } else {
         console.log('Please install MetaMask!');

@@ -518,6 +518,25 @@
         "type": "function"
     },
     {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            }
+        ],
+        "name": "getDirectReferrals",
+        "outputs": [
+            {
+                "internalType": "address[]",
+                "name": "",
+                "type": "address[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [],
         "name": "getLatestBNBPrice",
         "outputs": [
@@ -525,6 +544,30 @@
                 "internalType": "uint256",
                 "name": "",
                 "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "levels",
+                "type": "uint256"
+            }
+        ],
+        "name": "getUpline",
+        "outputs": [
+            {
+                "internalType": "address[]",
+                "name": "",
+                "type": "address[]"
             }
         ],
         "stateMutability": "view",
@@ -711,7 +754,17 @@
             },
             {
                 "internalType": "uint256",
-                "name": "rewardedTokens",
+                "name": "tier1Rewards",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "tier2Rewards",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "totalBoughtTokens",
                 "type": "uint256"
             }
         ],
