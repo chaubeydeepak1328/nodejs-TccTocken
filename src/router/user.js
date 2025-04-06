@@ -26,10 +26,7 @@ router.get("/coming-soon", (req, res) => {
 router.get("/contact", (req, res) => {
     res.render("contact");
 });
-// Account Page Route
-router.get("/earning", (req, res) => {
-    res.render("earning");
-});
+
 // Account Page Route
 router.get("/", (req, res) => {
     res.render("index-2");
@@ -59,5 +56,16 @@ router.get("/tocenomics", (req, res) => {
 });
 
 
+// For Direct Earning Page
+router.get("/earning", (req, res) => {
+    res.render("earning");
+});
+
+
+
+// for Level Earning Page
+router.get("/level-earning", (req, res) => {
+    res.render("level-earning");
+});
 
 module.exports = router;

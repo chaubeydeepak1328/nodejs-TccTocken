@@ -1,0 +1,310 @@
+<html lang="en">
+
+<!-- Mirrored from coderthemes.com/konrix/layouts/apps-tickets.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 26 Mar 2025 19:19:25 GMT -->
+
+<head>
+    <meta charset="utf-8" />
+    <title>Direct Earning</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+    <meta content="coderthemes" name="author" />
+
+    <!-- App favicon -->
+
+    <!-- App css -->
+    <link href="css/app.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Icons css -->
+    <link href="css/icons.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Theme Config Js -->
+    <script src="js/config.js"></script>
+</head>
+<style>
+    .app-header {
+        background: linear-gradient(90deg, #1b121d 0, #120f2f 50%,
+                #1b121d 100%);
+        ;
+    }
+
+    .app-menu {
+        background: linear-gradient(90deg, #1b121d 0,
+                #120f2f 50%, #1b121d 100%);
+    }
+
+    body {
+        background-color: black;
+    }
+
+    .card {
+        height: 100%;
+        padding: 20px;
+        border-radius: 10px;
+        background:
+            linear-gradient(90deg, #1b121d 0, #120f2f 50%, #1b121d 100%);
+        ;
+        border: 1px solid rgba(255, 255, 255, .15);
+    }
+
+    footer {
+        background:
+            linear-gradient(90deg, #1b121d 0, #120f2f 50%, #1b121d 100%);
+    }
+</style>
+
+<body>
+
+    <div class="flex wrapper">
+
+        <!-- Sidenav Menu -->
+        <div class="app-menu">
+
+            <!-- Sidenav Brand Logo -->
+            <a href="/userDashboard" class="logo-box">
+                <!-- Light Brand Logo -->
+                <div class="logo-light">
+                    <img src="logo1.png" class="logo-lg h-6" alt="Light logo" style="height: 80px;margin-top: 25px;" />
+                    <img src="logo1.png" class="logo-sm" alt="Small logo" />
+                </div>
+
+                <!-- Dark Brand Logo -->
+                <div class="logo-dark">
+                    <img src="logo1.png" class="logo-lg h-6" alt="Dark logo" style="height: 80px;margin-top: 25px;" />
+                    <img src="logo1.png" class="logo-sm" alt="Small logo" />
+                </div>
+            </a>
+
+            <!-- Sidenav Menu Toggle Button -->
+            <button id="button-hover-toggle" class="absolute top-5 end-2 rounded-full p-1.5">
+                <span class="sr-only">Menu Toggle Button</span>
+                <i class="mgc_round_line text-xl"></i>
+            </button>
+
+            <!---enu -->
+            <div class="srcollbar" data-simplebar>
+                <ul class="menu" data-fc-type="accordion">
+                    <li class="menu-title mt-4">Menu</li>
+
+                    <li class="menu-item mt-4">
+                        <a href="/userDashboard" class="menu-link">
+                            <span class="menu-icon"><i class="mgc_home_3_line"></i></span>
+                            <span class="menu-text"> Dashboard </span>
+                        </a>
+                    </li>
+
+                    {{!-- Direact Earning --}}
+                    <li class="menu-item mt-4">
+                        <a href="/earning" class="menu-link">
+                            <span class="menu-icon"><i class="mgc_coupon_line"></i></span>
+                            <span class="menu-text">Direct Earning</span>
+                        </a>
+                    </li>
+
+                    {{!-- Level Earning --}}
+                    <li class="menu-item mt-4">
+                        <a href="/level-earning" class="menu-link">
+                            <span class="menu-icon"><i class="mgc_coupon_line"></i></span>
+                            <span class="menu-text">Level Earning</span>
+                        </a>
+                    </li>
+
+
+                    <li class="menu-item mt-4">
+                        <a href="#" class="menu-link">
+                            <span class="menu-icon"><i class="mgc_exit_line me-2"></i></span>
+                            <span class="menu-text">Log out</span>
+                        </a>
+                    </li>
+
+                </ul>
+
+                <!-- Help Box Widget -->
+
+            </div>
+        </div>
+        <!-- Sidenav Menu End  -->
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="page-content">
+
+            <!-- Topbar Start -->
+            <header class="app-header flex items-center px-4 gap-3">
+                <!-- Sidenav Menu Toggle Button -->
+                <button id="button-toggle-menu" class="nav-link p-2">
+                    <span class="sr-only">Menu Toggle Button</span>
+                    <span class="flex items-center justify-center h-6 w-6">
+                        <i class="mgc_menu_line text-xl"></i>
+                    </span>
+                </button>
+
+                <!-- Topbar Brand Logo -->
+                <a href="/userDashboard" class="logo-box">
+                    <!-- Light Brand Logo -->
+                    <div class="logo-light">
+                        <img src="logo1.png" class="logo-lg h-6" alt="Light logo"
+                            style="height: 80px;margin-top: 25px;" />
+                        <img src="logo1.png" class="logo-sm" alt="Small logo" />
+                    </div>
+
+                    <!-- Dark Brand Logo -->
+                    <div class="logo-dark">
+                        <img src="logo1.png" class="logo-lg h-6" alt="Dark logo"
+                            style="height: 80px;margin-top: 25px;" />
+                        <img src="logo1.png" class="logo-sm" alt="Small logo" />
+                    </div>
+                </a>
+
+                <!-- Topbar Search Modal Button -->
+                <button type="button" data-fc-type="modal" data-fc-target="topbar-search-modal"
+                    class="nav-link p-2 me-auto">
+                    <span class="sr-only">Search</span>
+                    <span class="flex items-center justify-center h-6 w-6">
+                        <i class="mgc_search_line text-2xl"></i>
+                    </span>
+                </button>
+
+                <!-- Language Dropdown Button -->
+
+                <!-- Fullscreen Toggle Button -->
+                <div class="md:flex hidden">
+                    <button data-toggle="fullscreen" type="button" class="nav-link p-2">
+                        <span class="sr-only">Fullscreen Mode</span>
+                        <span class="flex items-center justify-center h-6 w-6">
+                            <i class="mgc_fullscreen_line text-2xl"></i>
+                        </span>
+                    </button>
+                </div>
+
+            </header>
+            <!-- Topbar End -->
+
+            <!-- Topbar Search Modal -->
+            <div>
+                <div id="topbar-search-modal" class="fc-modal hidden w-full h-full fixed top-0 start-0 z-50">
+                    <div
+                        class="fc-modal-open:opacity-100 fc-modal-open:duration-500 opacity-0 transition-all sm:max-w-lg sm:w-full m-12 sm:mx-auto">
+                        <div
+                            class="mx-auto max-w-2xl overflow-hidden rounded-xl bg-white shadow-2xl transition-all dark:bg-slate-800">
+                            <div class="relative">
+                                <div
+                                    class="pointer-events-none absolute top-3.5 start-4 text-gray-900 text-opacity-40 dark:text-gray-200">
+                                    <i class="mgc_search_line text-xl"></i>
+                                </div>
+                                <input type="search"
+                                    class="h-12 w-full border-0 bg-transparent ps-11 pe-4 text-gray-900 placeholder-gray-500 dark:placeholder-gray-300 dark:text-gray-200 focus:ring-0 sm:text-sm"
+                                    placeholder="Search..." />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <main class="flex-grow p-6">
+
+                <!-- Page Title Start -->
+                <div class="flex justify-between items-center mb-6">
+                    <h4 class="text-slate-900 dark:text-slate-200 text-lg font-medium">Direct Earning</h4>
+
+                </div>
+                <!-- Page Title End -->
+
+
+
+                <div class="mt-6">
+                    <div class="card">
+
+                        <div class="relative overflow-x-auto">
+                            <table class="w-full divide-y divide-gray-300 dark:divide-gray-700">
+                                <thead
+                                    class="bg-slate-300 bg-opacity-20 border-t dark:bg-slate-800 divide-gray-300 dark:border-gray-700">
+                                    <tr>
+                                        <th scope="col"
+                                            class="py-3.5 ps-4 pe-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-200">
+                                            ID</th>
+                                        <th scope="col"
+                                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-200">
+                                            Wallet
+                                            Address
+                                        </th>
+                                        <th scope="col"
+                                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-200">
+                                            Referrer</th>
+                                        <th scope="col"
+                                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-200">
+                                            Total Earning</th>
+                                        <th scope="col"
+                                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-200">
+                                            Purchased Tokens
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody id="LevelEbody" class="divide-y divide-gray-200 dark:divide-gray-700 ">
+
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+
+            <!-- Footer Start -->
+            <footer class="footer h-16 flex items-center px-6 bg-white shadow dark:bg-gray-800">
+                <div class="flex justify-center w-full gap-4">
+                    <div>
+                        <script>document.write(new Date().getFullYear())</script>
+                        © Design
+                    </div>
+                </div>
+            </footer>
+            <!-- Footer End -->
+
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+    </div>
+
+    <!-- Back to Top Button -->
+    <button data-toggle="back-to-top"
+        class="fixed hidden h-10 w-10 items-center justify-center rounded-full z-10 bottom-20 end-14 p-2.5 bg-primary cursor-pointer shadow-lg text-white">
+        <i class="mgc_arrow_up_line text-lg"></i>
+    </button>
+
+
+
+
+
+
+    <!-- Plugin Js -->
+    <script src="libs/simplebar/simplebar.min.js"></script>
+    <script src="libs/feather-icons/feather.min.js"></script>
+    <script src="libs/%40frostui/tailwindcss/frostui.js"></script>
+
+    <!-- App Js -->
+    <script src="js/app.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/web3@4.16.0/dist/web3.min.js"></script>
+    <script src="/levelEarning.js"></script>
+
+
+    <script></script>
+
+
+
+
+
+
+
+</body>
+
+</html>

@@ -554,13 +554,13 @@ const fetchUserDetails = async () => {
         const data = await response.json();
         console.log("User details:", data.data.getDirectReferralsCount);
 
-        document.getElementById("totalBoughtTokens").innerHTML = ((data.data.totalBoughtTokens) / 10 ** 18).toString();
-        document.getElementById("tier1Rewards").innerHTML = ((data.data.tier1Rewards) / 10 ** 18).toString();
-        document.getElementById("tier2Rewards").innerHTML = ((data.data.tier2Rewards) / 10 ** 18).toString();
-        document.getElementById("communityEarning").innerHTML = parseFloat((data.data.tier1Rewards) / 10 ** 18) + parseFloat((data.data.tier2Rewards) / 10 ** 18);
-        document.getElementById("totalCoinSold").innerHTML = ((data.data.totalSold) / 10 ** 18).toString();
+        document.getElementById("totalBoughtTokens").innerHTML = ((data.data.totalBoughtTokens) / 10 ** 18).toString() + " TCC";
+        document.getElementById("tier1Rewards").innerHTML = ((data.data.tier1Rewards) / 10 ** 18).toString() + " TCC";
+        document.getElementById("tier2Rewards").innerHTML = ((data.data.tier2Rewards) / 10 ** 18).toString() + " TCC";
+        document.getElementById("communityEarning").innerHTML = parseFloat((data.data.tier1Rewards) / 10 ** 18) + parseFloat((data.data.tier2Rewards) / 10 ** 18) + " TCC";
+        document.getElementById("totalCoinSold").innerHTML = ((data.data.totalSold) / 10 ** 18).toString() + " TCC";
         document.getElementById("getDirectReferalCount").innerHTML = data.data.getDirectReferralsCount.toString();
-        document.getElementById("totalReferalEarning").innerHTML = ((data.data.tier1Rewards) / 10 ** 18).toString();
+        document.getElementById("totalReferalEarning").innerHTML = ((data.data.tier1Rewards) / 10 ** 18).toString() + " TCC";
 
 
 
@@ -627,7 +627,6 @@ const fetchWalletTransactions = async () => {
         console.error("Failed to fetch wallet transactions:", err);
     }
 };
-
 
 
 
