@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser');
 
 
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3003;
 
 // Path Setup: Define paths for static files, views, and partials.
 const static_path = path.join(__dirname, "../public");

@@ -344,10 +344,14 @@
                         00.00</p>
                     </div>
                     <div class="flex flex-col items-center gap-4">
+                      {{!-- <input type="text" class="form-input rounded-full px-4 py-2" placeholder="Enter Amount"
+                        id="transferAmount" /> --}}
                       <input type="text" class="form-input rounded-full px-4 py-2" placeholder="Enter Amount"
-                        id="transferAmount" />
+                        id="amount" />
+                      {{!-- <input type="text" class="form-input rounded-full px-4 py-2"
+                        placeholder="Enter Referral Address" id="referalAddress" /> --}}
                       <input type="text" class="form-input rounded-full px-4 py-2" placeholder="Enter Referral Address"
-                        id="referalAddress" />
+                        id="referrerAddress" />
 
                       <!-- Optional max button -->
                       <!--
@@ -371,7 +375,13 @@
                         Connect Wallet
                       </a> --}}
 
-                      <button id="transferButton" type="button"
+                      {{!-- <button id="transferButton" type="button"
+                        style="      background: linear-gradient(90deg, #1b121d 0, #120f2f 50%, #1b121d 100%);border: 1px solid gray;border-radius: 12px;"
+                        class="btn inline-flex justify-center items-center bg-primary text-white w-full">
+                        <i class="mgc_add_line text-lg me-2"></i>
+                        Buy Coins
+                      </button> --}}
+                      <button id="BuyTCC" type="button"
                         style="      background: linear-gradient(90deg, #1b121d 0, #120f2f 50%, #1b121d 100%);border: 1px solid gray;border-radius: 12px;"
                         class="btn inline-flex justify-center items-center bg-primary text-white w-full">
                         <i class="mgc_add_line text-lg me-2"></i>
@@ -474,6 +484,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/web3@4.16.0/dist/web3.min.js"></script>
   <script src="/buy.js"></script>
+  <script src="/newdist6//bundle.js"></script>
 
 
 </body>

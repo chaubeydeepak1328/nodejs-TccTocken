@@ -398,13 +398,14 @@ document.getElementById('copy').addEventListener('click', function () {
 
 
 const checkWalletSign = async () => {
-    const web3 = new Web3(window.ethereum);
+    // const web3 = new Web3(window.ethereum);
     try {
-        const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-        const account = accounts[0];
+        // const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+        // const account = accounts[0];
 
 
         // performing otehr operation 
+        const account = localStorage.getItem("walletAddress");
 
         const walletLink = document.getElementById("link");
         if (walletLink) {
@@ -452,7 +453,7 @@ const referral = document.getElementById("referalAddress");
 
 const web3 = new Web3(window.ethereum); // create Web3 instance
 let abi = [];
-let accounts = [];
+let accounts = [localStorage.getItem("walletAddress"), ''];
 let contract = null;
 const contractAddress = "0xe3eafae0A321D6d40fcA7103876A7eBA4C5855E9";
 
@@ -510,69 +511,71 @@ const fetchAbi = async () => {
 
 
 
-const walletTransfer = async () => {
+// const walletTransfer = async () => {
 
-    console.log("Sending came here...=====1");
-    const amountInEth = transferAmountInput.value;
-    const referrerAddress = referral.value // Default address if not provided
+//     console.log("Sending came here...=====1");
+//     const amountInEth = transferAmountInput.value;
+//     const referrerAddress = referral.value // Default address if not provided
 
-    if (!amountInEth || isNaN(amountInEth) || Number(amountInEth) <= 0) {
-        alert("Please enter a valid amount.");
-        return;
-    }
-
-
-    console.log("Sending came here...=====2");
+//     if (!amountInEth || isNaN(amountInEth) || Number(amountInEth) <= 0) {
+//         alert("Please enter a valid amount.");
+//         return;
+//     }
 
 
-    console.log(amountInEth)
-
-    const valueInWei = Web3.utils.toWei(amountInEth, 'ether');
-
-    console.log("Sending came here...=====3", web3.utils.toHex(BigInt(valueInWei)));
-
-    console.log("from", accounts[0]);
-    console.log("to", contractAddress);
-    console.log("referrerAddress", referrerAddress);
+//     console.log("Sending came here...=====2");
 
 
+//     console.log(amountInEth)
 
-    const estimatedGas = await contract.methods.buyTokens(referrerAddress).estimateGas({
-        from: accounts[0],
-        value: valueInWei
-    });
+//     const valueInWei = Web3.utils.toWei(amountInEth, 'ether');
 
-    const gasPrice = await web3.eth.getGasPrice();
+//     console.log("Sending came here...=====3", web3.utils.toHex(BigInt(valueInWei)));
 
-    const nonce = await web3.eth.getTransactionCount(accounts[0], 'latest');
+//     console.log("from", accounts[0]);
+//     console.log("to", contractAddress);
+//     console.log("referrerAddress", referrerAddress);
 
-    const txParams = {
-        from: accounts[0],
-        to: contractAddress,
-        value: web3.utils.toHex(BigInt(valueInWei)),
-        gas: web3.utils.toHex(BigInt(estimatedGas)),
-        gasPrice: web3.utils.toHex(BigInt(gasPrice)),
-        nonce: web3.utils.toHex(nonce),
-        data: contract.methods.buyTokens(referrerAddress).encodeABI()
-    };
 
-    console.log("Sending transaction:", txParams);
 
-    try {
-        const txHash = await ethereum.request({
-            method: 'eth_sendTransaction',
-            params: [txParams],
-        });
+//     const estimatedGas = await contract.methods.buyTokens(referrerAddress).estimateGas({
+//         from: accounts[0],
+//         value: valueInWei
+//     });
 
-        console.log("Transaction Hash:", txHash);
-    } catch (error) {
-        console.error("Transaction Failed:", error);
-        alert("Transaction failed: " + error.message);
-    }
+//     const gasPrice = await web3.eth.getGasPrice();
+
+//     const nonce = await web3.eth.getTransactionCount(accounts[0], 'latest');
+
+//     const txParams = {
+//         from: accounts[0],
+//         to: contractAddress,
+//         value: web3.utils.toHex(BigInt(valueInWei)),
+//         gas: web3.utils.toHex(BigInt(estimatedGas)),
+//         gasPrice: web3.utils.toHex(BigInt(gasPrice)),
+//         nonce: web3.utils.toHex(nonce),
+//         data: contract.methods.buyTokens(referrerAddress).encodeABI()
+//     };
+
+//     console.log("Sending transaction:", txParams);
+
+//     try {
+//         const txHash = await ethereum.request({
+//             method: 'eth_sendTransaction',
+//             params: [txParams],
+//         });
+
+//         console.log("Transaction Hash:", txHash);
+//     } catch (error) {
+//         console.error("Transaction Failed:", error);
+//         alert("Transaction failed: " + error.message);
+//     }
+// }
+
+
+if (transferButton) {
+    transferButton.addEventListener('click', walletTransfer);
 }
-
-
-transferButton.addEventListener('click', walletTransfer);
 
 
 
@@ -672,7 +675,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (typeof window.ethereum !== 'undefined') {
         console.log('MetaMask is installed!');
         await checkWalletSign();
-        await getAccount();
+        // await getAccount();
         await fetchAbi();
         await fetchUserDetails();
         await fetchWalletTransactions();
@@ -684,9 +687,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-async function getAccount() {
-    accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-}
+// async function getAccount() {
+//     accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+// }
 
 
 

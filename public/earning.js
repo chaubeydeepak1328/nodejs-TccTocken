@@ -1,27 +1,27 @@
 
 
-const checkWalletSign = async () => {
-    const web3 = new Web3(window.ethereum);
-    try {
-        const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-        const account = accounts[0];
+// const checkWalletSign = async () => {
+//     const web3 = new Web3(window.ethereum);
+//     try {
+//         const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+//         const account = accounts[0];
 
-        if (!account) {
-            window.location.href = "/";
-        } else {
-            console.log("Connected account:", account);
-        }
-    } catch (error) {
+//         if (!account) {
+//             window.location.href = "/";
+//         } else {
+//             console.log("Connected account:", account);
+//         }
+//     } catch (error) {
 
-        console.error("Error connecting to wallet:", error);
-    }
-}
+//         console.error("Error connecting to wallet:", error);
+//     }
+// }
 
 
 
 const web3 = new Web3(window.ethereum); // create Web3 instance
 let abi = [];
-let accounts = [];
+let accounts = [localStorage.getItem("walletAddress"), ""];
 let contract = null;
 const contractAddress = "0xe3eafae0A321D6d40fcA7103876A7eBA4C5855E9";
 
@@ -87,7 +87,7 @@ const fetchDirectEarning = async () => {
                     </div>
                 </td>
                 <td class="text-sm text-gray-700 dark:text-gray-300">${referrer.slice(0, 5)}...${referrer.slice(-4)}</td>
-                <td class="text-sm text-gray-700 dark:text-gray-300">${tier1}</td>
+                <td class="text-sm text-gray-700 dark:text-gray-300">${(totalTokenPurchased * 8) / 100}</td>
                  <td class="text-sm text-gray-700 dark:text-gray-300">${totalTokenPurchased}</td>
             `;
             directbody.appendChild(row);
@@ -113,9 +113,9 @@ const fetchDirectEarning = async () => {
 document.addEventListener('DOMContentLoaded', async () => {
     if (typeof window.ethereum !== 'undefined') {
         console.log('MetaMask is installed!');
-        await checkWalletSign();
+        // await checkWalletSign();
         await fetchAbi(); // ✅ Wait for ABI to load and contract to initialize
-        await getAccount(); // ✅ Ensure accounts are set
+        // await getAccount(); // ✅ Ensure accounts are set
         await fetchDirectEarning(); // ✅ Now contract and accounts are ready
     } else {
         console.log('Please install MetaMask!');
@@ -124,9 +124,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 
-async function getAccount() {
-    accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-}
+// async function getAccount() {
+//     accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+// }
 
 
 

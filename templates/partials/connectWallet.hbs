@@ -5,64 +5,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connect Wallet</title>
-    <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
+    {{!--
+    <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script> --}}
+
 </head>
 
 <body>
     <ul class="metaportal_fn_items">
         <li>
-            <button class="item" id="connectWallet">
+            <button class="item" id="connectWalletBtn">
                 <span class="icon">
                     <img src="/img/wallet/walletconnect.png" alt="">
                 </span>
-                <span class="text" id="walletText">Checking...</span>
+                <span class="text" id="WalletAddressUser" style="color:green">Connect wallet</span>
             </button>
         </li>
     </ul>
 
+    <script src="/newdist6//bundle.js"></script>
+
     <script>
-        const walletText = document.getElementById("walletText");
-        const connectBtn = document.getElementById("connectWallet");
-
-        let account = null;
-
-        async function checkIfWalletConnected() {
-            if (window.ethereum) {
-                const web3 = new Web3(window.ethereum);
-                const accounts = await web3.eth.getAccounts();
-                if (accounts.length > 0) {
-                    account = accounts[0];
-                    walletText.innerText = "Connected";
-                    window.location.href = "/userDashboard";
-                } else {
-                    walletText.innerText = "Connect Wallet";
-                }
-            } else {
-                walletText.innerText = "MetaMask Not Found";
+        // ✅ 1. Check walletAddress on page load
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedAddress = localStorage.getItem("walletAddress");
+            if (savedAddress && savedAddress !== "0" && savedAddress !== "") {
+                window.location.href = "/userDashboard";
             }
-        }
+        });
 
-        async function connectWallet() {
-            if (window.ethereum) {
-                try {
-                    const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-                    account = accounts[0];
-                    walletText.innerText = "Connected";
+
+        if (window.ethereum) {
+            try {
+                const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+                const userAddress = accounts[0];
+
+                localStorage.setItem("walletAddress", userAddress);
+
+                walletText.innerText = "Connected";
+                walletText.style.color = "limegreen";
+                connectButton.disabled = true;
+                connectButton.classList.add("disabled");
+
+                // ✅ Redirect after short delay
+                setTimeout(() => {
                     window.location.href = "/userDashboard";
-                } catch (error) {
-                    console.error("Connection Error:", error);
-                    alert("Failed to connect wallet");
-                }
-            } else {
-                alert("No Ethereum provider found. Please install MetaMask.");
+                }, 5000);
+
+            } catch (error) {
+                console.error("User denied wallet connection", error);
             }
+        } else {
+            alert("MetaMask is not installed!");
         }
-
-        connectBtn.addEventListener("click", connectWallet);
-
-        // Auto check on load
-        checkIfWalletConnected();
+        });
     </script>
+
+
+
+
+
 </body>
 
 </html>
