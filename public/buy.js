@@ -383,6 +383,17 @@
 //     }
 // });
 
+document.getElementById('copy').addEventListener('click', function () {
+    const input = document.querySelector('#link');
+    input.select();
+    input.setSelectionRange(0, 99999); // For mobile devices
+
+    navigator.clipboard.writeText(input.value).then(() => {
+        alert("Copied to clipboard!");
+    }).catch(err => {
+        console.error("Failed to copy:", err);
+    });
+});
 
 
 
@@ -391,6 +402,32 @@ const checkWalletSign = async () => {
     try {
         const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
         const account = accounts[0];
+
+
+        // performing otehr operation 
+
+        const walletLink = document.getElementById("link");
+        if (walletLink) {
+            walletLink.value = `https://tcc20.com/userDashboard?walletadd=${account}`;
+        } else {
+            console.warn("Input with ID 'walletLink' not found in the DOM.");
+        }
+
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const walletAddress = urlParams.get('walletadd');
+
+        if (walletAddress) {
+            const input = document.getElementById('referalAddress');
+            if (input) {
+                input.value = walletAddress;
+                input.readOnly = true; // <-- This makes it readonly
+            }
+        }
+
+
+        // performing otehr operation  End
+
 
         if (!account) {
             window.location.href = "/";
