@@ -75,6 +75,10 @@ router.post("/user_details", async (req, res) => {
         // make the call to the contract
         const user = await contract.methods.users(walletAddress).call();
 
+        const totalSold = await contract.methods.totalSold().call();
+
+        const directReferal = await contract.methods.getDirectReferrals(walletAddress).call();
+
 
         console.log("user", user);
 
@@ -85,6 +89,8 @@ router.post("/user_details", async (req, res) => {
                 "tier1Rewards": user.tier1Rewards.toString(),
                 "tier2Rewards": user.tier2Rewards.toString(),
                 "totalBoughtTokens": user.totalBoughtTokens.toString(),
+                "totalSold": totalSold.toString(),
+                "getDirectReferralsCount": directReferal.toString().split(",").length,
 
             }
         });

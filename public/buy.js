@@ -552,16 +552,79 @@ const fetchUserDetails = async () => {
         });
 
         const data = await response.json();
+        console.log("User details:", data.data.getDirectReferralsCount);
 
-        document.getElementById("totalBoughtTokens").innerHTML = data.data.totalBoughtTokens.toString();
-        document.getElementById("tier1Rewards").innerHTML = data.data.tier1Rewards.toString();
-        document.getElementById("tier2Rewards").innerHTML = data.data.tier2Rewards.toString();
-        document.getElementById("communityEarning").innerHTML = parseFloat(data.data.tier1Rewards) + parseFloat(data.data.tier2Rewards);
+        document.getElementById("totalBoughtTokens").innerHTML = ((data.data.totalBoughtTokens) / 10 ** 18).toString();
+        document.getElementById("tier1Rewards").innerHTML = ((data.data.tier1Rewards) / 10 ** 18).toString();
+        document.getElementById("tier2Rewards").innerHTML = ((data.data.tier2Rewards) / 10 ** 18).toString();
+        document.getElementById("communityEarning").innerHTML = parseFloat((data.data.tier1Rewards) / 10 ** 18) + parseFloat((data.data.tier2Rewards) / 10 ** 18);
+        document.getElementById("totalCoinSold").innerHTML = ((data.data.totalSold) / 10 ** 18).toString();
+        document.getElementById("getDirectReferalCount").innerHTML = data.data.getDirectReferralsCount.toString();
+        document.getElementById("totalReferalEarning").innerHTML = ((data.data.tier1Rewards) / 10 ** 18).toString();
 
 
 
     } catch (error) {
         console.error('Error fetching wallet data:', error);
+    }
+};
+
+
+
+const fetchWalletTransactions = async () => {
+    const walletAddress = accounts[0];
+    const etherscanApiKey = 'JRA6JIVJQCK333XNWDZTFV7A7SFSYKB9XD';
+    const url = `https://api-sepolia.etherscan.io/api?module=account&action=txlist&address=${walletAddress}&startblock=0&endblock=99999999&sort=desc&apikey=${etherscanApiKey}`;
+
+    try {
+        const response = await fetch(url);
+        const result = await response.json();
+        console.log("Wallet transactions:", result);
+
+        if (result.status === "1") {
+            const txs = result.result;
+
+            // Filter: Only transactions made to your contract address
+            const contractTxs = txs.filter(tx => tx.to?.toLowerCase() === contractAddress.toLowerCase());
+
+            console.log("Transactions sent to contract:", contractTxs);
+
+            // Log value in ETH correctly
+            contractTxs.forEach(tx => {
+                const ethValue = web3.utils.fromWei(tx.value.toString(), 'ether');
+                console.log(`Hash: ${tx.hash}, Value: ${ethValue} ETH`);
+            });
+
+            const tbody = document.getElementById('transactionBody');
+            tbody.innerHTML = ''; // Optional: Clear previous rows
+
+            contractTxs.forEach(tx => {
+                const ethValue = web3.utils.fromWei(tx.value.toString(), 'ether');
+                const readableTime = new Date(tx.timeStamp * 1000).toLocaleString();
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                  <td class="p-3.5 text-sm text-gray-700 dark:text-gray-400">
+                    <a href="https://sepolia.etherscan.io/tx/${tx.hash}" target="_blank" class="font-medium">${tx.hash.slice(0, 10)}...</a>
+                  </td>
+                  <td class="p-3.5 text-sm text-gray-700 dark:text-gray-400">
+                    <p>${readableTime}</p>
+                    <span class="text-xs">Block: ${tx.blockNumber}</span>
+                  </td>
+                  <td class="p-3.5 text-sm text-gray-700 dark:text-gray-400">${ethValue} ETH</td>
+                  <td class="p-3.5 text-sm text-gray-700 dark:text-gray-400">${tx.from}</td>
+                  <td class="p-3.5 text-sm text-gray-700 dark:text-gray-400">${tx.to}</td>
+                 
+                  
+                `;
+                tbody.appendChild(row);
+            });
+
+        } else {
+            console.error("Error fetching transactions:", result.message);
+        }
+    } catch (err) {
+        console.error("Failed to fetch wallet transactions:", err);
     }
 };
 
@@ -575,7 +638,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         await checkWalletSign();
         await getAccount();
         await fetchAbi();
-        fetchUserDetails();
+        await fetchUserDetails();
+        await fetchWalletTransactions();
         // await fetchWalletData();
         // ethereumButton.innerText = 'Connect Wallet';
     } else {
