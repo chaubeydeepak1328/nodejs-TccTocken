@@ -299,4 +299,106 @@ router.get("/wallet_transfer", async (req, res) => {
 
 
 
+
+router.post("/all-transaction", async (req, res) => {
+    const { walletAddress } = req.body;
+    const etherscanApiKey = 'JRA6JIVJQCK333XNWDZTFV7A7SFSYKB9XD';
+    const contractAddress = "0xe3eafae0A321D6d40fcA7103876A7eBA4C5855E9";
+    const url = `https://api-sepolia.etherscan.io/api?module=account&action=txlist&address=${walletAddress}&startblock=0&endblock=99999999&sort=desc&apikey=${etherscanApiKey}`;
+
+    try {
+        if (!walletAddress) {
+            return res.status(400).json({ message: "Wallet address is required" });
+        }
+
+        const response = await fetch(url);
+        const result = await response.json();
+
+        if (result.status !== "1" || !Array.isArray(result.result)) {
+            return res.status(500).json({ message: "Failed to fetch transactions from Etherscan" });
+        }
+
+        const txs = result.result;
+
+        // Optional: remove the filter temporarily to test
+        const contractTxs = txs.filter(tx => tx.to?.toLowerCase() === contractAddress.toLowerCase());
+
+        // Add readableTime and ETH conversion on server side
+        const formattedTxs = contractTxs.map(tx => ({
+            ...tx,
+            readableTime: new Date(tx.timeStamp * 1000).toLocaleString(),
+            value: (Number(tx.value) / 1e18).toFixed(5) // convert Wei to ETH
+        }));
+
+        res.status(200).json({ data: formattedTxs });
+
+    } catch (err) {
+        console.error("Server error while fetching transactions:", err);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
+
+
+router.post("/direct-earning", async (req, res) => {
+    const { walletAddress } = req.body;
+
+    if (!walletAddress) {
+        return res.status(400).json({ message: "Wallet address is required" });
+    }
+
+    try {
+        const directReferrals = await contract.methods.getDirectReferrals(walletAddress).call();
+        console.log("Backend Direct Referrals:", directReferrals);
+
+        const referralData = await Promise.all(
+            directReferrals.map(async (refAddress) => {
+                try {
+                    // Fetch user data for each direct referral
+                    const user = await contract.methods.users(refAddress).call();
+
+                    const referrer = user.referrer || "N/A";
+                    const tier1 = (parseFloat(user.tier1Rewards) / 1e18).toFixed(5);
+                    const tier2 = (parseFloat(user.tier2Rewards) / 1e18).toFixed(5);
+                    const totalTokenPurchased = (parseFloat(user.totalBoughtTokens) / 1e18).toFixed(5);
+                    const reward = ((parseFloat(totalTokenPurchased) * 8) / 100).toFixed(5);
+
+                    return {
+                        walletAddress: refAddress,
+                        referrer,
+                        tier1,
+                        tier2,
+                        totalTokenPurchased,
+                        reward,
+                    };
+                } catch (error) {
+                    console.error("Error fetching referral details for:", refAddress, error);
+                    return {
+                        walletAddress: refAddress,
+                        referrer: "Error",
+                        tier1: "0",
+                        tier2: "0",
+                        totalTokenPurchased: "0",
+                        reward: "0",
+                    };
+                }
+            })
+        );
+
+        res.status(200).json({ data: referralData });
+
+    } catch (error) {
+        console.error("Error in /direct-earning:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
+
+
+router.post("/level-earning", async (req, res) => {
+
+})
+
+
+
 module.exports = router;
