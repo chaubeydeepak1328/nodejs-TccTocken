@@ -2,7 +2,7 @@
 
 
 // const web3 = new Web3(window.ethereum); // create Web3 instance
-let abi = [];
+// let abi = [];
 let accounts = [localStorage.getItem("walletAddress"), ""];
 let contract = null;
 const contractAddress = "0xe3eafae0A321D6d40fcA7103876A7eBA4C5855E9";
@@ -90,36 +90,33 @@ const fetchDirectEarning = async () => {
         });
 
         const resData = await response.json();
-        console.log(resData)
-        const referrals = resData.data;
+        const referrals = resData?.data || [];
 
-        directbody.innerHTML = ""; // Clear table
+        console.log("Direct Earning Referrals:", referrals);
 
-        if (referrals && referrals.length > 0) {
-            referrals.forEach((item, index) => {
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td class="whitespace-nowrap py-4 ps-4 pe-3 text-sm font-medium text-gray-700 dark:text-gray-300">
-                        <b>#${index + 1}</b>
-                    </td>
-                    <td class="whitespace-nowrap py-4 pe-3 text-sm">
-                        <div class="flex items-center">
-                            <div class="font-medium text-gray-700 dark:text-gray-300 ms-4">
-                                ${item.walletAddress.slice(0, 5)}...${item.walletAddress.slice(-4)}
-                            </div>
-                        </div>
-                    </td>
-                    <td class="text-sm text-gray-700 dark:text-gray-300">
-                        ${item.referrer.slice(0, 5)}...${item.referrer.slice(-4)}
-                    </td>
-                    <td class="text-sm text-gray-700 dark:text-gray-300">${item.reward}</td>
-                    <td class="text-sm text-gray-700 dark:text-gray-300">${item.totalTokenPurchased}</td>
-                `;
-                directbody.appendChild(row);
-            });
-        } else {
-            directbody.innerHTML = `<tr><td colspan="5" class="text-center text-gray-500 p-4">No referrals found.</td></tr>`;
+        directbody.innerHTML = ""; // Clear existing rows
+
+        if (referrals.length === 0) {
+            directbody.innerHTML = `<tr><td colspan="6" class="text-center text-gray-500 p-4">No referrals found.</td></tr>`;
+            return;
         }
+
+        referrals.forEach((item, index) => {
+            const wallet = item.walletAddress || "N/A";
+            const referrer = item.referrer || "N/A";
+            const reward = item.reward || "0.00000";
+            const totalTokens = item.totalTokenPurchased || "0.00000";
+
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td class="py-4 ps-4 pe-3 text-sm font-medium text-gray-700 dark:text-gray-300"><b>#${index + 1}</b></td>
+                <td class="py-4 pe-3 text-sm text-gray-700 dark:text-gray-300">${wallet.slice(0, 5)}...${wallet.slice(-4)}</td>
+                <td class="py-4 pe-3 text-sm text-gray-700 dark:text-gray-300">${referrer.slice(0, 5)}...${referrer.slice(-4)}</td>
+                <td class="py-4 pe-3 text-sm text-gray-700 dark:text-gray-300">${totalTokens}</td>
+                <td class="py-4 pe-3 text-sm text-gray-700 dark:text-gray-300">${reward}</td>
+            `;
+            directbody.appendChild(row);
+        });
 
     } catch (err) {
         console.error("Error fetching direct earnings:", err);
@@ -130,31 +127,39 @@ const fetchDirectEarning = async () => {
 
 
 
+const btn = document.getElementById("Logout");
+
+const Logout = async () => {
+
+    // Clear localStorage and sessionStorage
+    localStorage.clear();
+    sessionStorage.clear();
+
+    // Clear all cookies
+    document.cookie.split(";").forEach(cookie => {
+        const name = cookie.split("=")[0].trim();
+        document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/`;
+    });
+
+
+    // Redirect to homepage
+    location.href = "/";
+};
 
 
 
-
+if (btn) {
+    btn.addEventListener("click", Logout)
+}
 
 
 
 
 document.addEventListener('DOMContentLoaded', async () => {
-    if (typeof window.ethereum !== 'undefined') {
-        console.log('MetaMask is installed!');
-        // await checkWalletSign();
-        // await fetchAbi(); // ✅ Wait for ABI to load and contract to initialize
-        // await getAccount(); // ✅ Ensure accounts are set
-        await fetchDirectEarning(); // ✅ Now contract and accounts are ready
-    } else {
-        console.log('Please install MetaMask!');
-        ethereumButton.innerText = 'Install MetaMask';
-    }
+
+    await fetchDirectEarning();
+
 });
-
-
-// async function getAccount() {
-//     accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-// }
 
 
 

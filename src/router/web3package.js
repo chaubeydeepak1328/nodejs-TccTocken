@@ -366,8 +366,6 @@ router.post("/direct-earning", async (req, res) => {
                     return {
                         walletAddress: refAddress,
                         referrer,
-                        tier1,
-                        tier2,
                         totalTokenPurchased,
                         reward,
                     };
@@ -376,8 +374,6 @@ router.post("/direct-earning", async (req, res) => {
                     return {
                         walletAddress: refAddress,
                         referrer: "Error",
-                        tier1: "0",
-                        tier2: "0",
                         totalTokenPurchased: "0",
                         reward: "0",
                     };
@@ -396,8 +392,53 @@ router.post("/direct-earning", async (req, res) => {
 
 
 router.post("/level-earning", async (req, res) => {
+    const { walletAddress } = req.body;
 
-})
+    if (!walletAddress) {
+        return res.status(400).json({ message: "Wallet address is required" });
+    }
+
+    try {
+        const directReferrals = await contract.methods.getUpline(walletAddress, 2).call();
+        console.log("Backend Direct Referrals:", directReferrals);
+
+        const referralData = await Promise.all(
+            directReferrals.map(async (refAddress) => {
+                try {
+                    // Fetch user data for each direct referral
+                    const user = await contract.methods.users(refAddress).call();
+
+                    const referrer = user.referrer || "N/A";
+                    const tier1 = (parseFloat(user.tier1Rewards) / 1e18).toFixed(5);
+                    const tier2 = (parseFloat(user.tier2Rewards) / 1e18).toFixed(5);
+                    const totalTokenPurchased = (parseFloat(user.totalBoughtTokens) / 1e18).toFixed(5);
+                    const reward = ((parseFloat(totalTokenPurchased) * 8) / 100).toFixed(5);
+
+                    return {
+                        walletAddress: refAddress,
+                        referrer,
+                        totalTokenPurchased,
+                        reward,
+                    };
+                } catch (error) {
+                    console.error("Error fetching referral details for:", refAddress, error);
+                    return {
+                        walletAddress: refAddress,
+                        referrer: "Error",
+                        totalTokenPurchased: "0",
+                        reward: "0",
+                    };
+                }
+            })
+        );
+
+        res.status(200).json({ data: referralData });
+
+    } catch (error) {
+        console.error("Error in /direct-earning:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
 
 
 

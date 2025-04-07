@@ -208,7 +208,30 @@ const fetchWalletTransactions = async () => {
 };
 
 
+const btn = document.getElementById("Logout");
 
+const Logout = async () => {
+
+    // Clear localStorage and sessionStorage
+    localStorage.clear();
+    sessionStorage.clear();
+
+    // Clear all cookies
+    document.cookie.split(";").forEach(cookie => {
+        const name = cookie.split("=")[0].trim();
+        document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/`;
+    });
+
+
+    // Redirect to homepage
+    location.href = "/";
+};
+
+
+
+if (btn) {
+    btn.addEventListener("click", Logout)
+}
 
 
 document.addEventListener('DOMContentLoaded', async () => {
