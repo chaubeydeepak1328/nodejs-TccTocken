@@ -17,6 +17,7 @@
 
   <!-- Icons css -->
   <link href="css/icons.min.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" />
 
   <!-- Theme Config Js -->
   <script src="js/config.js"></script>
@@ -485,6 +486,39 @@
   <script src="https://cdn.jsdelivr.net/npm/web3@4.16.0/dist/web3.min.js"></script>
   <script src="/buy.js"></script>
   <script src="/newdist6//bundle.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+   // Bind initial confirm dialog
+    const byTCCToken = document.getElementById("BuyTCC");
+
+    byTCCToken.addEventListener("click", async () => {
+      const walletAddress = localStorage.getItem("walletAddress") || "N/A";
+      const tokenAmount = document.getElementById("amount").value + " TCC"; // optional
+      const network = "Ethereum Sepolia";
+
+      const result = await Swal.fire({
+        title: "Please Confirm the Request",
+        html: `
+      <div style="text-align: left; font-size: 1rem;">
+        <p><strong>Wallet Address:</strong> ${walletAddress}</p>
+        <p><strong>Amount:</strong> ${tokenAmount}</p>
+        <p><strong>Network:</strong> ${network}</p>
+      </div>
+    `,
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonText: "Confirm",
+        cancelButtonText: "Cancel",
+        background: "#f0f8ff",
+        backdrop: `rgba(0,0,123,0.4)`
+      });
+    });
+
+   
+
+  </script>
+
 
 
 </body>
