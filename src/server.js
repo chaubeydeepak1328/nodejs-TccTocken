@@ -42,6 +42,6 @@ app.use(web3package);
 
 
 // Start Server: Start the Express server on the defined port.
-app.listen(port, () => {
+app.listen(port, "0.0.0.0", () => {
     console.log(colors.cyan(`Listening to the port ${port}`));
 })
