@@ -139,7 +139,7 @@
   </div>
   <!-- !Searchbox Popup -->
   <!-- Wallet Popup -->
-  <div class="metaportal_fn_wallet_closer ready"></div>
+  {{!-- <div class="metaportal_fn_wallet_closer ready"></div>
   <div class="metaportal_fn_walletbox ready">
     <a href="#" class="fn__closer"><span></span></a>
     <div class="walletbox">
@@ -156,7 +156,7 @@
       </div>
 
     </div>
-  </div>
+  </div> --}}
   <!-- !Wallet Popup -->
 
   <!-- Main -->
@@ -172,7 +172,7 @@
 
         </div>
         <div class="wallet">
-          <a href="#" class="metaportal_fn_button wallet_opener"><span>Wallet</span></a>
+          <a href="#" class="metaportal_fn_button wallet_opener"><span id="connectWalletBtn1">Wallet</span></a>
         </div>
       </div>
       <div class="mob_mid">
@@ -501,6 +501,7 @@
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 </script>
+<script src="/newdist6//bundle.js"></script>
 <script>
   var xValues = ["Reserved for exclusive listings", "Public Sell", "First-time exchange listing", "Gaming Ecosystem", "Airdrop Distribution", "Development Initiatives", "Market Exchange Management"];
   var yValues = [100, 25, 25, 2, 6, 9, 19];
