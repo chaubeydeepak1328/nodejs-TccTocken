@@ -73,6 +73,9 @@ const contractAddress = "0xe3eafae0A321D6d40fcA7103876A7eBA4C5855E9";
 // };
 
 
+
+
+
 const fetchDirectEarning = async () => {
     const directbody = document.getElementById('DireactEBody');
     if (!directbody) {
@@ -125,33 +128,12 @@ const fetchDirectEarning = async () => {
 
 
 
+const wAddress = document.getElementById("userWalletAdress")
 
-
-const btn = document.getElementById("Logout");
-
-const Logout = async () => {
-
-    // Clear localStorage and sessionStorage
-    localStorage.clear();
-    sessionStorage.clear();
-
-    // Clear all cookies
-    document.cookie.split(";").forEach(cookie => {
-        const name = cookie.split("=")[0].trim();
-        document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/`;
-    });
-
-
-    // Redirect to homepage
-    location.href = "/";
-};
-
-
-
-if (btn) {
-    btn.addEventListener("click", Logout)
+if (wAddress) {
+    const wallet = localStorage.getItem("walletAddress");
+    userWalletAdress.innerHTML = wallet.slice(0, 4) + "..." + wallet.slice(-5)
 }
-
 
 
 

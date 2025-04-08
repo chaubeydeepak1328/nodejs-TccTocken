@@ -302,6 +302,7 @@
           </span>
         </button>
 
+
         <!-- Language Dropdown Button -->
 
         <!-- Fullscreen Toggle Button -->
@@ -340,9 +341,15 @@
 
       <main class="flex-grow p-6">
 
+        <div class="flex justify-between items-center mb-6">
+          <h4 class="text-slate-900 text-white text-lg font-medium ">wallet : <span id="userWalletAdress"></span>
+          </h4>
+
+        </div>
+
         <!-- Page Title Start -->
         <div class="flex justify-between items-center mb-6">
-          <h4 class="text-slate-900 dark:text-slate-200 text-lg font-medium">Dashboard</h4>
+          <h4 class="text-slate-900 text-white text-lg font-medium">Dashboard</h4>
 
         </div>
         <!-- Page Title End -->
@@ -520,7 +527,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/web3@4.16.0/dist/web3.min.js"></script>
   <script src="/buy.js"></script>
-  <script src="/newdist6//bundle.js"></script>
+  <script src="/newdist6/bundle.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script>
@@ -529,7 +536,7 @@
 
     byTCCToken.addEventListener("click", async () => {
       const walletAddress = localStorage.getItem("walletAddress") || "N/A";
-      const tokenAmount = document.getElementById("amount").value + " TCC"; // optional
+      const tokenAmount = document.getElementById("amount").value + "BNB"; // optional
       const network = "Ethereum Sepolia";
 
       const result = await Swal.fire({
@@ -542,11 +549,8 @@
       </div>
     `,
         icon: 'info',
-        showCancelButton: true,
-        confirmButtonText: "Confirm",
-        cancelButtonText: "Cancel",
         background: "#f0f8ff",
-        backdrop: `rgba(0,0,123,0.4)`
+
       });
     });
 

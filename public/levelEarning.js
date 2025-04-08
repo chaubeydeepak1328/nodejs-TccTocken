@@ -71,6 +71,12 @@ const contractAddress = "0xe3eafae0A321D6d40fcA7103876A7eBA4C5855E9";
 
 
 
+
+
+
+
+
+
 const fetchLevelEarning = async () => {
     const directbody = document.getElementById('LevelEbody');
     if (!directbody) {
@@ -123,42 +129,19 @@ const fetchLevelEarning = async () => {
 
 
 
+const wAddress = document.getElementById("userWalletAdress")
 
-const btn = document.getElementById("Logout");
-
-const Logout = async () => {
-
-    // Clear localStorage and sessionStorage
-    localStorage.clear();
-    sessionStorage.clear();
-
-    // Clear all cookies
-    document.cookie.split(";").forEach(cookie => {
-        const name = cookie.split("=")[0].trim();
-        document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/`;
-    });
-
-
-    // Redirect to homepage
-    location.href = "/";
-};
-
-
-
-if (btn) {
-    btn.addEventListener("click", Logout)
+if (wAddress) {
+    const wallet = localStorage.getItem("walletAddress");
+    userWalletAdress.innerHTML = wallet.slice(0, 4) + "..." + wallet.slice(-5)
 }
-
-
-
-
-
 
 
 document.addEventListener('DOMContentLoaded', async () => {
 
     // await getAccount(); // ✅ Ensure accounts are set
-    await fetchLevelEarning(); // ✅ Now contract and accounts are ready
+
+    await fetchLevelEarning();// ✅ Now contract and accounts are ready
 
 });
 
