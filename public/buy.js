@@ -164,7 +164,7 @@ const fetchWalletTransactions = async () => {
     console.log("Fetching user details...", accounts[0]);
 
     try {
-        const response = await fetch("/all-transaction", {
+        const response = await fetch("/purchased-token", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -173,39 +173,63 @@ const fetchWalletTransactions = async () => {
         });
 
         const data = await response.json();
-        console.log(data)
+        console.log("Transaction Data:", data);
+
         const tbody = document.getElementById('transactionBody');
         tbody.innerHTML = '';
 
-        if (data.data && data.data.length > 0) {
-            data.data.forEach(tx => {
+        if (Array.isArray(data) && data.length > 0) {
+            data.forEach(tx => {
+                // Safely get the participant (buyer, introducer, or secondUpline)
+                const participant =
+                    tx.buyer || tx.introducer || tx.secondUpline || "N/A";
+
+                // Format amounts (from wei to ether/token)
+                const formatEther = (wei) =>
+                    (Number(wei) / 1e18).toFixed(4);
+
+                const amountFormatted = tx.amount ? formatEther(tx.amount) : "-";
+                const costFormatted = tx.cost ? formatEther(tx.cost) + " BNB" : "-";
+
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td class="p-3.5 text-sm text-gray-700 dark:text-gray-400">
-                        <a href="https://sepolia.etherscan.io/tx/${tx.hash}" target="_blank" class="font-medium">${tx.hash.slice(0, 10)}...</a>
+                        <a href="https://testnet.bscscan.com/tx/${tx.transactionHash}"
+                           target="_blank" 
+                           class="font-medium">
+                           ${tx.transactionHash.slice(0, 10)}...
+                        </a>
                     </td>
                     <td class="p-3.5 text-sm text-gray-700 dark:text-gray-400">
-                        <p>${tx.readableTime}</p>
-                        <span class="text-xs">Block: ${tx.blockNumber}</span>
+                        ${tx.type}
                     </td>
-                    <td class="p-3.5 text-sm text-gray-700 dark:text-gray-400">${tx.value} ETH</td>
-                    <td class="p-3.5 text-sm text-gray-700 dark:text-gray-400">${tx.from}</td>
-                    <td class="p-3.5 text-sm text-gray-700 dark:text-gray-400">${tx.to}</td>
+                    <td class="p-3.5 text-sm text-gray-700 dark:text-gray-400">
+                        ${amountFormatted}
+                    </td>
+                    <td class="p-3.5 text-sm text-gray-700 dark:text-gray-400">
+                        ${costFormatted}
+                    </td>
+                    <td class="p-3.5 text-sm text-gray-700 dark:text-gray-400">
+                        ${participant}
+                    </td>
+                   
                 `;
                 tbody.appendChild(row);
             });
         } else {
             tbody.innerHTML = `
                 <tr>
-                    <td colspan="5" class="text-center text-gray-500 p-4">No transactions found.</td>
+                    <td colspan="6" class="text-center text-gray-500 p-4">
+                        No transactions found.
+                    </td>
                 </tr>
             `;
         }
-
     } catch (err) {
         console.error("Failed to fetch wallet transactions:", err);
     }
 };
+
 
 
 

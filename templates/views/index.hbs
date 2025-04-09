@@ -453,12 +453,14 @@
                           <tr class="text-gray-800 dark:text-gray-300">
                             <th scope="col" class="p-3.5 text-sm text-start font-semibold min-w-[10rem]">Hash
                             </th>
-                            <th scope="col" class="p-3.5 text-sm text-start font-semibold min-w-[10rem]">Created At
+                            <th scope="col" class="p-3.5 text-sm text-start font-semibold min-w-[10rem]">Type
                             </th>
-                            <th scope="col" class="p-3.5 text-sm text-start font-semibold min-w-[6rem]">Amount
+                            <th scope="col" class="p-3.5 text-sm text-start font-semibold min-w-[10rem]">TCC Token
                             </th>
-                            <th scope="col" class="p-3.5 text-sm text-start font-semibold min-w-[8rem]">Sender</th>
-                            <th scope="col" class="p-3.5 text-sm text-start font-semibold min-w-[6rem]">Receiver</th>
+                            <th scope="col" class="p-3.5 text-sm text-start font-semibold min-w-[6rem]">Cost
+                            </th>
+                            <th scope="col" class="p-3.5 text-sm text-start font-semibold min-w-[8rem]">Participant</th>
+
                           </tr>
                         </thead>
                         <tbody id="transactionBody" class="divide-y divide-gray-200 dark:divide-gray-600">
@@ -537,7 +539,7 @@
     byTCCToken.addEventListener("click", async () => {
       const walletAddress = localStorage.getItem("walletAddress") || "N/A";
       const tokenAmount = document.getElementById("amount").value + "BNB"; // optional
-      const network = "Ethereum Sepolia";
+      const network = "BSC Mainnet";
 
       const result = await Swal.fire({
         title: "Please Confirm the Request",
@@ -549,7 +551,9 @@
       </div>
     `,
         icon: 'info',
-        background: "#f0f8ff",
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#3085d6'
+
 
       });
     });
