@@ -89,7 +89,14 @@ const fetchUserDetails = async () => {
         const data = await response.json();
         console.log("User details:", data.data.getDirectReferralsCount);
 
-        document.getElementById("totalBoughtTokens").innerHTML = ((data.data.totalBoughtTokens) / 10 ** 18).toString() + " TCC";
+
+        const totalBoughtTokens = BigInt(data.data.totalBoughtTokens);
+        const tier1Rewards = BigInt(data.data.tier1Rewards);
+        const tier2Rewards = BigInt(data.data.tier2Rewards);
+
+        const totalWalletToken = (Number(totalBoughtTokens + tier1Rewards + tier2Rewards) / 1e18).toFixed(5);
+
+        document.getElementById("totalBoughtTokens").innerHTML = totalWalletToken + " TCC";
         document.getElementById("tier1Rewards").innerHTML = ((data.data.tier1Rewards) / 10 ** 18).toString() + " TCC";
         document.getElementById("tier2Rewards").innerHTML = ((data.data.tier2Rewards) / 10 ** 18).toString() + " TCC";
         document.getElementById("communityEarning").innerHTML = parseFloat((data.data.tier1Rewards) / 10 ** 18) + parseFloat((data.data.tier2Rewards) / 10 ** 18) + " TCC";
