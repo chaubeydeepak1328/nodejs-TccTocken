@@ -358,105 +358,105 @@ router.post("/user_details", async (req, res) => {
 
 
 
-router.post("/direct-earning", async (req, res) => {
-    const { walletAddress } = req.body;
+// router.post("/direct-earning", async (req, res) => {
+//     const { walletAddress } = req.body;
 
-    if (!walletAddress) {
-        return res.status(400).json({ message: "Wallet address is required" });
-    }
+//     if (!walletAddress) {
+//         return res.status(400).json({ message: "Wallet address is required" });
+//     }
 
-    try {
-        const directReferrals = await contract.methods.getDirectReferrals(walletAddress).call();
-        console.log("Backend Direct Referrals:", directReferrals);
+//     try {
+//         const directReferrals = await contract.methods.getDirectReferrals(walletAddress).call();
+//         console.log("Backend Direct Referrals:", directReferrals);
 
-        const referralData = await Promise.all(
-            directReferrals.map(async (refAddress) => {
-                try {
-                    // Fetch user data for each direct referral
-                    const user = await contract.methods.users(refAddress).call();
+//         const referralData = await Promise.all(
+//             directReferrals.map(async (refAddress) => {
+//                 try {
+//                     // Fetch user data for each direct referral
+//                     const user = await contract.methods.users(refAddress).call();
 
-                    const referrer = user.referrer || "N/A";
-                    const tier1 = (parseFloat(user.tier1Rewards) / 1e18).toFixed(5);
-                    const tier2 = (parseFloat(user.tier2Rewards) / 1e18).toFixed(5);
-                    const totalTokenPurchased = (parseFloat(user.totalBoughtTokens) / 1e18).toFixed(5);
-                    const reward = ((parseFloat(totalTokenPurchased) * 8) / 100).toFixed(5);
+//                     const referrer = user.referrer || "N/A";
+//                     const tier1 = (parseFloat(user.tier1Rewards) / 1e18).toFixed(5);
+//                     const tier2 = (parseFloat(user.tier2Rewards) / 1e18).toFixed(5);
+//                     const totalTokenPurchased = (parseFloat(user.totalBoughtTokens) / 1e18).toFixed(5);
+//                     const reward = ((parseFloat(totalTokenPurchased) * 8) / 100).toFixed(5);
 
-                    return {
-                        walletAddress: refAddress,
-                        referrer,
-                        totalTokenPurchased,
-                        reward,
-                    };
-                } catch (error) {
-                    console.error("Error fetching referral details for:", refAddress, error);
-                    return {
-                        walletAddress: refAddress,
-                        referrer: "Error",
-                        totalTokenPurchased: "0",
-                        reward: "0",
-                    };
-                }
-            })
-        );
+//                     return {
+//                         walletAddress: refAddress,
+//                         referrer,
+//                         totalTokenPurchased,
+//                         reward,
+//                     };
+//                 } catch (error) {
+//                     console.error("Error fetching referral details for:", refAddress, error);
+//                     return {
+//                         walletAddress: refAddress,
+//                         referrer: "Error",
+//                         totalTokenPurchased: "0",
+//                         reward: "0",
+//                     };
+//                 }
+//             })
+//         );
 
-        res.status(200).json({ data: referralData });
+//         res.status(200).json({ data: referralData });
 
-    } catch (error) {
-        console.error("Error in /direct-earning:", error);
-        res.status(500).json({ message: "Internal server error" });
-    }
-});
+//     } catch (error) {
+//         console.error("Error in /direct-earning:", error);
+//         res.status(500).json({ message: "Internal server error" });
+//     }
+// });
 
 
 
-router.post("/level-earning", async (req, res) => {
-    const { walletAddress } = req.body;
+// router.post("/level-earning", async (req, res) => {
+//     const { walletAddress } = req.body;
 
-    if (!walletAddress) {
-        return res.status(400).json({ message: "Wallet address is required" });
-    }
+//     if (!walletAddress) {
+//         return res.status(400).json({ message: "Wallet address is required" });
+//     }
 
-    try {
-        const directReferrals = await contract.methods.getUpline(walletAddress, 2).call();
-        console.log("Backend Direct Referrals:", directReferrals);
+//     try {
+//         const directReferrals = await contract.methods.getUpline(walletAddress, 2).call();
+//         console.log("Backend Direct Referrals:", directReferrals);
 
-        const referralData = await Promise.all(
-            directReferrals.map(async (refAddress) => {
-                try {
-                    // Fetch user data for each direct referral
-                    const user = await contract.methods.users(refAddress).call();
+//         const referralData = await Promise.all(
+//             directReferrals.map(async (refAddress) => {
+//                 try {
+//                     // Fetch user data for each direct referral
+//                     const user = await contract.methods.users(refAddress).call();
 
-                    const referrer = user.referrer || "N/A";
-                    const tier1 = (parseFloat(user.tier1Rewards) / 1e18).toFixed(5);
-                    const tier2 = (parseFloat(user.tier2Rewards) / 1e18).toFixed(5);
-                    const totalTokenPurchased = (parseFloat(user.totalBoughtTokens) / 1e18).toFixed(5);
-                    const reward = ((parseFloat(totalTokenPurchased) * 8) / 100).toFixed(5);
+//                     const referrer = user.referrer || "N/A";
+//                     const tier1 = (parseFloat(user.tier1Rewards) / 1e18).toFixed(5);
+//                     const tier2 = (parseFloat(user.tier2Rewards) / 1e18).toFixed(5);
+//                     const totalTokenPurchased = (parseFloat(user.totalBoughtTokens) / 1e18).toFixed(5);
+//                     const reward = ((parseFloat(totalTokenPurchased) * 8) / 100).toFixed(5);
 
-                    return {
-                        walletAddress: refAddress,
-                        referrer,
-                        totalTokenPurchased,
-                        reward,
-                    };
-                } catch (error) {
-                    console.error("Error fetching referral details for:", refAddress, error);
-                    return {
-                        walletAddress: refAddress,
-                        referrer: "Error",
-                        totalTokenPurchased: "0",
-                        reward: "0",
-                    };
-                }
-            })
-        );
+//                     return {
+//                         walletAddress: refAddress,
+//                         referrer,
+//                         totalTokenPurchased,
+//                         reward,
+//                     };
+//                 } catch (error) {
+//                     console.error("Error fetching referral details for:", refAddress, error);
+//                     return {
+//                         walletAddress: refAddress,
+//                         referrer: "Error",
+//                         totalTokenPurchased: "0",
+//                         reward: "0",
+//                     };
+//                 }
+//             })
+//         );
 
-        res.status(200).json({ data: referralData });
+//         res.status(200).json({ data: referralData });
 
-    } catch (error) {
-        console.error("Error in /direct-earning:", error);
-        res.status(500).json({ message: "Internal server error" });
-    }
-});
+//     } catch (error) {
+//         console.error("Error in /direct-earning:", error);
+//         res.status(500).json({ message: "Internal server error" });
+//     }
+// });
 
 
 
@@ -531,6 +531,99 @@ router.post("/level-earning", async (req, res) => {
 //         console.error("Error fetching events:", error);
 //     }
 // });
+
+
+
+router.post("/level-earning", async (req, res) => {
+    try {
+        const { walletAddress } = req.body;
+
+        const uplineEvents = await contract.getPastEvents("SecondUplilneRewarded", {
+            filter: { introducer: walletAddress },
+            fromBlock: 0,
+            toBlock: "latest",
+        });
+
+        const decodedUplines = uplineEvents.map(event => {
+            const decoded = web3.eth.abi.decodeLog(
+                [
+                    { type: 'uint256', name: 'amount' }
+                ],
+                event.data,
+                event.topics.slice(1)
+            );
+
+            return {
+                secondUpline: '0x' + event.topics[1].slice(26),
+                amount: decoded.amount.toString() / 10 ** 18, // Convert BigInt to string
+                blockNumber: event.blockNumber,
+                transactionHash: event.transactionHash,
+                type: "Level Income"
+            };
+        });
+
+        const convertBigIntsToStrings = (data) => {
+            return JSON.parse(JSON.stringify(data, (_, value) =>
+                typeof value === 'bigint' ? value.toString() : value
+            ));
+        };
+
+
+
+        res.status(200).json(convertBigIntsToStrings(decodedUplines));
+
+
+    } catch (error) {
+        console.error("Error fetching events:", error);
+        res.status(500).send({ error: "Failed to fetch events." });
+    }
+});
+
+
+
+router.post("/direct-earning", async (req, res) => {
+    try {
+        const { walletAddress } = req.body;
+
+
+        const introducerEvents = await contract.getPastEvents("IntroducerRewarded", {
+            filter: { introducer: walletAddress },
+            fromBlock: 0,
+            toBlock: "latest",
+        });
+
+        const decodedIntroducers = introducerEvents.map(event => {
+            const decoded = web3.eth.abi.decodeLog(
+                [
+                    { type: 'uint256', name: 'amount' }
+                ],
+                event.data,
+                event.topics.slice(1)
+            );
+
+            return {
+                introducer: '0x' + event.topics[1].slice(26),
+                amount: decoded.amount.toString() / 10 ** 18,
+                blockNumber: event.blockNumber,
+                transactionHash: event.transactionHash
+            };
+        });
+
+        const convertBigIntsToStrings = (data) => {
+            return JSON.parse(JSON.stringify(data, (_, value) =>
+                typeof value === 'bigint' ? value.toString() : value
+            ));
+        };
+
+
+
+        res.status(200).json(convertBigIntsToStrings(decodedIntroducers));
+    } catch (error) {
+        console.error("Error fetching events:", error);
+        res.status(500).json({ error: "Failed to fetch events." });
+    }
+});
+
 
 
 router.post("/purchased-token", async (req, res) => {
