@@ -64,7 +64,7 @@ const referral = document.getElementById("referalAddress");
 let abi = [];
 let accounts = [localStorage.getItem("walletAddress"), ''];
 let contract = null;
-const contractAddress = "0x0bE6d38f9433f51B38397D2785fd5A132e79c028";
+const contractAddress = "0xAd771bac597eFac136929195985577Da0C40e557";
 
 
 

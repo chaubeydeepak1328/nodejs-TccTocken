@@ -20,7 +20,7 @@ const abi = JSON.parse(fs.readFileSync(path.join(__dirname, "../Contract/contrac
 
 // Contract instance   process.env.CONTRACT_ADDRESS
 // const contract = new web3.eth.Contract(abi, "0xe3eafae0A321D6d40fcA7103876A7eBA4C5855E9");
-const contract = new web3.eth.Contract(abi, "0x0bE6d38f9433f51B38397D2785fd5A132e79c028");
+const contract = new web3.eth.Contract(abi, "0xAd771bac597eFac136929195985577Da0C40e557");
 
 
 // router.get("/wallet_data", async (req, res) => {
