@@ -4,8 +4,8 @@
 // const web3 = new Web3(window.ethereum); // create Web3 instance
 // let abi = [];
 let accounts = [localStorage.getItem("walletAddress"), ""];
-let contract = null;
-const contractAddress = "0xe3eafae0A321D6d40fcA7103876A7eBA4C5855E9";
+// let contract = null;
+// const contractAddress = "0xe3eafae0A321D6d40fcA7103876A7eBA4C5855E9";
 
 
 

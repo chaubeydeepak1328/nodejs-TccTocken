@@ -1,7 +1,7 @@
 
 let accounts = [localStorage.getItem("walletAddress"), ""];
 
-const contractAddress = "0xe3eafae0A321D6d40fcA7103876A7eBA4C5855E9";
+// const contractAddress = "0xe3eafae0A321D6d40fcA7103876A7eBA4C5855E9";
 
 
 
@@ -165,7 +165,7 @@ const fetchLevelEarning = async () => {
             row.innerHTML = `
                 <td class="py-4 ps-4 pe-3 text-sm font-medium text-gray-700 dark:text-gray-300"><b>#${index + 1}</b></td>
 <td class="py-4 pe-3 text-sm text-blue-600 dark:text-blue-400 underline">
-  <a href="https://testnet.bscscan.com/tx/${transactionHash}" target="_blank" rel="noopener noreferrer">
+  <a href="https://bscscan.com/tx/${transactionHash}" target="_blank" rel="noopener noreferrer">
     ${transactionHash.slice(0, 5)}...${transactionHash.slice(-4)}
   </a>
 </td>

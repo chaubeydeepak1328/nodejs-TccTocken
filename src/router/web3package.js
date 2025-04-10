@@ -8,7 +8,9 @@ const path = require("path");
 const fs = require('fs');
 
 // const INFURA_URL = "https://sepolia.infura.io/v3/32193d86ae664f1188540cfca7b790cf"
-const INFURA_URL = "https://bsc-testnet.infura.io/v3/32193d86ae664f1188540cfca7b790cf"
+// const INFURA_URL = "https://bsc-testnet.infura.io/v3/32193d86ae664f1188540cfca7b790cf"
+const INFURA_URL = "https://bsc-mainnet.infura.io/v3/32193d86ae664f1188540cfca7b790cf"
+
 // Connect to Ethereum network  process.env.INFURA_URL
 const web3 = new Web3(INFURA_URL);
 
@@ -18,51 +20,51 @@ const abi = JSON.parse(fs.readFileSync(path.join(__dirname, "../Contract/contrac
 
 // Contract instance   process.env.CONTRACT_ADDRESS
 // const contract = new web3.eth.Contract(abi, "0xe3eafae0A321D6d40fcA7103876A7eBA4C5855E9");
-const contract = new web3.eth.Contract(abi, "0x4378067372859734CbcB3b1000944e90cfb7A41d");
+const contract = new web3.eth.Contract(abi, "0x0bE6d38f9433f51B38397D2785fd5A132e79c028");
 
 
-router.get("/wallet_data", async (req, res) => {
-    try {
+// router.get("/wallet_data", async (req, res) => {
+//     try {
 
-        // make the call to the contract
-        const totalSupply = await contract.methods.TOTAL_SUPPLY().call();
+//         // make the call to the contract
+//         const totalSupply = await contract.methods.TOTAL_SUPPLY().call();
 
-        // make the call to the contract
-        const totalSold = await contract.methods.totalSold().call();
+//         // make the call to the contract
+//         const totalSold = await contract.methods.totalSold().call();
 
-        // make the call to the contract
-        const user = await contract.methods.users("0xc0358Bcd0F329644A9A034f9F2C4a4838ae819A5").call();
+//         // make the call to the contract
+//         const user = await contract.methods.users("0xc0358Bcd0F329644A9A034f9F2C4a4838ae819A5").call();
 
-        // make the call to the contract
-        const getdirectReferal = await contract.methods.getDirectReferrals("0xc0358Bcd0F329644A9A034f9F2C4a4838ae819A5").call();
+//         // make the call to the contract
+//         const getdirectReferal = await contract.methods.getDirectReferrals("0xc0358Bcd0F329644A9A034f9F2C4a4838ae819A5").call();
 
-        // total remaining = total supply - total sold
-        const totalRemaining = totalSupply - totalSold;
+//         // total remaining = total supply - total sold
+//         const totalRemaining = totalSupply - totalSold;
 
-        // make the call to the contract
-        const referalAllocation = await contract.methods.TOTAL_REFERRAL_ALLOCATION().call();
+//         // make the call to the contract
+//         const referalAllocation = await contract.methods.TOTAL_REFERRAL_ALLOCATION().call();
 
-        // const WalletBalance = await web3.eth.getBalance('0xe3eafae0A321D6d40fcA7103876A7eBA4C5855E9');
+//         // const WalletBalance = await web3.eth.getBalance('0xe3eafae0A321D6d40fcA7103876A7eBA4C5855E9');
 
-        console.log("user", user);
+//         console.log("user", user);
 
 
-        res.send({
-            data: {
-                "totalSupply": totalSupply.toString(),
-                "totalSold": totalSold.toString(),
-                "totalRemaining": totalRemaining.toString(),
-                "referalAllocation": referalAllocation.toString(),
-                // "WalletBalance": web3.utils.fromWei(WalletBalance, 'ether').toString(),
-                "user": user.toString(),
-                "getdirectReferal": getdirectReferal.toString(),
-            }
-        });
-    } catch (error) {
-        console.error("Error fetching data:", error);
-        res.status(500).send("Error fetching data from blockchain.");
-    }
-});
+//         res.send({
+//             data: {
+//                 "totalSupply": totalSupply.toString(),
+//                 "totalSold": totalSold.toString(),
+//                 "totalRemaining": totalRemaining.toString(),
+//                 "referalAllocation": referalAllocation.toString(),
+//                 // "WalletBalance": web3.utils.fromWei(WalletBalance, 'ether').toString(),
+//                 "user": user.toString(),
+//                 "getdirectReferal": getdirectReferal.toString(),
+//             }
+//         });
+//     } catch (error) {
+//         console.error("Error fetching data:", error);
+//         res.status(500).send("Error fetching data from blockchain.");
+//     }
+// });
 
 
 

@@ -64,7 +64,7 @@ const referral = document.getElementById("referalAddress");
 let abi = [];
 let accounts = [localStorage.getItem("walletAddress"), ''];
 let contract = null;
-const contractAddress = "0xe3eafae0A321D6d40fcA7103876A7eBA4C5855E9";
+const contractAddress = "0x0bE6d38f9433f51B38397D2785fd5A132e79c028";
 
 
 
@@ -201,7 +201,7 @@ const fetchWalletTransactions = async () => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td class="p-3.5 text-sm text-gray-700 dark:text-gray-400">
-                        <a href="https://testnet.bscscan.com/tx/${tx.transactionHash}"
+                        <a href="https://bscscan.com/tx/${tx.transactionHash}"
                            target="_blank" 
                            class="font-medium">
                            ${tx.transactionHash.slice(0, 10)}...
